@@ -12,7 +12,6 @@ def main(mimc3_path, mimic4_path):
             tables=["DIAGNOSES_ICD", "PROCEDURES_ICD", "PRESCRIPTIONS"],
             code_mapping={"NDC": ("ATC", {"target_kwargs": {"level": 3}})},
         )
-        breakpoint()
         len_mimic3 = mimic3_ds.set_task(task_fn=length_of_stay_prediction_mimic3_fn)
 
         with open(f'data/length_pred/mimic3/length_pred_data.json', 'w') as f:
