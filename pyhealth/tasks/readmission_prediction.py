@@ -138,6 +138,7 @@ def readmission_prediction_mimic4_fn(patient: Patient, time_window=15):
     conditions = visit.get_code_list(table="diagnoses_icd")
     procedures = visit.get_code_list(table="procedures_icd")
     drugs = visit.get_code_list(table="prescriptions")
+    patient.birth_datetime = patient.birth_datetime.replace(month=9, day=4)
     age = calculate_age(patient.birth_datetime, visit.encounter_time)
     gender = patient.gender
     ethnicity = patient.ethnicity
