@@ -27,8 +27,8 @@ Clone the repository
 
 
 ```shell
-git clone ...
-cd ...
+git clone https://github.com/canyuchen/llm4clinical_prediction
+cd llm4clinical_prediction
 ```
 
 Download the environment
@@ -44,11 +44,11 @@ The structure of the important files:
 ```shell
 llm4clinical_prediction_release/
 └── src/
-	├── process_data.sh
-	├── test.py
-	├── test_withprob.py
-	├── tradition.py
-	├── calculate.py
+    ├── process_data.sh
+    ├── test.py
+    ├── test_withprob.py
+    ├── tradition.py
+    ├── calculate.py
     ├── data/
     │   ├── length_pred/
     │   │   ├── mimic3/
