@@ -128,36 +128,3 @@ leaderboard/rtd_token.txt
 
 # locally pre-trained models
 pyhealth/medcode/pretrained_embeddings/kg_emb/examples/pretrained_model
-
-
-data/
-
-nlp_task/drug_pred/
-
-nlp_task/length_pred/all_data/
-
-nlp_task/length_pred/sample/
-
-nlp_task/length_pred/2page/
-
-nlp_task/mortality_pred/all_data/
-
-nlp_task/mortality_pred/sample/
-
-nlp_task/mortality_pred/2page/
-
-nlp_task/readmission_pred/all_data/
-
-nlp_task/readmission_pred/sample/
-
-nlp_task/readmission_pred/2pages/
-
-
-nlp_task/length_pred/mimic3/length_pred_data_ICL.csv
-
-nlp_task/mortality_pred/mimic3/mortality_pred_data_ICL.csv
-
-nlp_task/length_pred/mimic4/length_pred_data.csv
-
-nlp_task/mortality_pred/mimic4/mortality_pred_data.csv
-
