@@ -4,7 +4,7 @@ MIMIC3PATH=""
 MIMIC4PATH=""
 
 
-echo "Convert EHR EHR data into clinical codes..."
+echo "Convert EHR data into clinical codes..."
 python get_data.py \
     --mimic3_path ${MIMIC3PATH} \
     --mimic4_path ${MIMIC4PATH}
