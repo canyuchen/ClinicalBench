@@ -8,7 +8,6 @@ import transformers
 from torch.nn import functional as F
 import argparse
 from sklearn.metrics import f1_score
-from transformers.cache_utils import Cache
 
 
 
@@ -19,8 +18,6 @@ def main(args):
     task = args.task
     random_index = args.random_index
     mode = args.mode
-    temperature = args.temperature
-    cache_dir = args.cache_dir
     lora_path = args.lora_path
     
 
@@ -41,13 +38,6 @@ def main(args):
         random_index = 6
     if mode == "LORA":
         mode_str = "_LORA"
-    temp_str = ""
-    if temperature:
-        temp_str = "_temp_" + str(temperature)
-        
-    do_sample = False
-    if temperature is not None:
-        do_sample = True
 
     device = "cuda:0"
 
@@ -56,15 +46,14 @@ def main(args):
         device_map='auto',
         torch_dtype=torch.float16,
         trust_remote_code=True,
-        cache_dir=cache_dir
     )
 
 
 
     if base_model_name == "chaoyi-wu/MedLLaMA_13B":
-        tokenizer = transformers.LlamaTokenizer.from_pretrained('chaoyi-wu/MedLLaMA_13B', trust_remote_code=True, cache_dir=cache_dir)
+        tokenizer = transformers.LlamaTokenizer.from_pretrained('chaoyi-wu/MedLLaMA_13B', trust_remote_code=True)
     else:
-        tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True, cache_dir=cache_dir)
+        tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
 
 
     if mode == "LORA":
@@ -82,8 +71,8 @@ def main(args):
     
     number_list = ['1', '2', '3'] if task == "length_pred" else ['0', '1']
     number_token_ids = tokenizer.convert_tokens_to_ids(number_list)
-    with open(f'results/{task}/{dataset}/{task}_result_data_{model_name}_{random_index}{mode_str}{temp_str}.csv', 'w') as file:
-        filenames = ['SUBJECT_ID', 'ANSWER', 'PREDICTION', 'PROB']
+    with open(f'results/{task}/{dataset}/{task}_result_data_{model_name}_{random_index}{mode_str}.csv', 'w') as file:
+        filenames = ['SUBJECT_ID', 'ANSWER', 'PREDICTION', 'ORIGINAL', 'PROB']
         writer = csv.DictWriter(file, fieldnames=filenames)
         writer.writeheader()
 
@@ -130,25 +119,33 @@ def main(args):
                 with torch.no_grad():
                     outputs = model(**inputs)
                 predicted_token_ids = outputs.logits[0, :].argmax(dim=-1)
-                predicted_text = tokenizer.decode(predicted_token_ids)
-                number_position = 1
-                for i in range(len(predicted_text)+1):
-                    if predicted_text[-i] in number_list:
-                        number_position = i
-                        break
-                number_token_logits = outputs.logits[0, -number_position]
+                predicted_text = tokenizer.decode(predicted_token_ids)[-1]
+                original_response = predicted_text
+                number_token_logits = outputs.logits[0, -1]
                 number_logits = number_token_logits[number_token_ids]
                 probabilities = F.softmax(number_logits, dim=0)
-                most_likely_token_id = number_token_ids[torch.argmax(number_logits).item()]
-                predicted_token = tokenizer.decode([most_likely_token_id])
+                # most_likely_token_id = number_token_ids[torch.argmax(number_logits).item()]
+                # predicted_token_text = tokenizer.decode([most_likely_token_id])
                 probability = float(probabilities[-1])
-                response = predicted_token
+                response = predicted_text
+                if response not in number_list:
+                    if task == "length_pred":
+                        if gt == "1":
+                            response = "2"
+                        else:
+                            response = "1"
+                    else:
+                        if gt == "1":
+                            response = "0"
+                        else:
+                            response = "1"
+                
                 
                 preds.append(int(response))
                 answers.append(int(gt))
                 
                 
-                writer.writerow({'SUBJECT_ID': row['SUBJECT_ID'], 'ANSWER': row['ANSWER'], 'PREDICTION': response, 'PROB': probability})
+                writer.writerow({'SUBJECT_ID': row['SUBJECT_ID'], 'ANSWER': row['ANSWER'], 'PREDICTION': response, 'ORIGINAL': original_response, 'PROB': probability})
         
         if task == "length_pred":
             f1 = f1_score(answers, preds, average="macro")
@@ -171,8 +168,6 @@ if __name__ == "__main__":
     parser.add_argument("--task", type=str, default="length_pred", help="Task name")
     parser.add_argument("--random_index", type=int, default=0, help="Random index")
     parser.add_argument("--mode", type=str, default="ORI", choices=["ORI", "ICL", "COT", "RP", "SR", "LORA"], help="Mode")
-    parser.add_argument("--temperature", type=float, default=None, help="Temperature for sampling")
-    parser.add_argument("--cache_dir", type=str, default="", help="Cache directory")
 
     args = parser.parse_args()
     main(args)

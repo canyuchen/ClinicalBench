@@ -92,7 +92,7 @@ def main(dataset_path, ICL):
                     sentence = sentence0 + sentence1 + sentence2 + sentence3 + sentence4 + sentence5 + sentence6 + sentence7 + sentence8
                 writer.writerow({'ID': count, 'VISIT_ID': visit_id, 'SUBJECT_ID': subject_id, 'QUESTION': sentence, 'ANSWER': label})
                 count += 1
-        print(count)
+        # print(count)
 
 
 
