@@ -19,7 +19,6 @@ def main(args):
     random_index = args.random_index
     mode = args.mode
     temperature = args.temperature
-    cache_dir = args.cache_dir
     lora_path = args.lora_path
     
 
@@ -55,17 +54,15 @@ def main(args):
         device_map='auto',
         torch_dtype=torch.float16,
         trust_remote_code=True,
-        cache_dir=cache_dir
     )
 
 
     count = 0
-    right = 0
 
     if base_model_name == "chaoyi-wu/MedLLaMA_13B":
-        tokenizer = transformers.LlamaTokenizer.from_pretrained('chaoyi-wu/MedLLaMA_13B', trust_remote_code=True, cache_dir=cache_dir)
+        tokenizer = transformers.LlamaTokenizer.from_pretrained('chaoyi-wu/MedLLaMA_13B', trust_remote_code=True)
     else:
-        tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True, cache_dir=cache_dir)
+        tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
 
 
     if mode == "LORA":
@@ -161,8 +158,6 @@ def main(args):
                             response = "0"
                         else:
                             response = "1"
-                if response == gt:
-                    right += 1
                 
                 preds.append(int(response))
                 answers.append(int(gt))
@@ -177,7 +172,6 @@ def main(args):
         print(len(answers))
         print(f"F1: {f1}")
             
-        print(f"Accuracy: {right/count}")
 
 
 
@@ -193,7 +187,6 @@ if __name__ == "__main__":
     parser.add_argument("--random_index", type=int, default=0, help="Random index")
     parser.add_argument("--mode", type=str, default="ORI", choices=["ORI", "ICL", "COT", "RP", "SR", "LORA"], help="Mode")
     parser.add_argument("--temperature", type=float, default=None, help="Temperature for sampling")
-    parser.add_argument("--cache_dir", type=str, default="", help="Cache directory where saves your huggingface model")
 
     args = parser.parse_args()
     main(args)

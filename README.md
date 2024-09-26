@@ -97,8 +97,6 @@ Index 6: This is a sampled dataset that ensures the test set contains 500 sample
 
 ### Inference
 
-Hint: Adjust or remove the `--cache_dir` parameter in test files to use your preferred cache location or the system default.
-
 Test on a specific Model, Dataset, Task, Mode, Temperature, and Split Index:
 
 ```shell

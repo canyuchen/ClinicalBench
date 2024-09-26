@@ -21,14 +21,15 @@ python convert.py \
     --dataset_path ${MIMIC3PATH} \
     --ICL 0
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for length prediction, mimic3"
 fi
 
+echo "Preprocess prompt for length prediction, mimic3, ICL..."
 python convert.py \
     --dataset_path ${MIMIC3PATH} \
     --ICL 1
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for length prediction, mimic3, ICL"
 fi
 
 # mimic4, length
@@ -39,15 +40,15 @@ python convert.py\
     --dataset_path ${MIMIC4PATH} \
     --ICL 0
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for length prediction, mimic4"
 fi
 
-
+echo "Preprocess prompt for length prediction, mimic4, ICL..."
 python convert.py\
     --dataset_path ${MIMIC4PATH} \
     --ICL 1
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for length prediction, mimic4, ICL"
 fi
 
 
@@ -60,14 +61,15 @@ python convert.py\
     --dataset_path ${MIMIC3PATH} \
     --ICL 0
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for mortality prediction, mimic3"
 fi
 
+echo "Preprocess prompt for mortality prediction, mimic3, ICL..."
 python convert.py\
     --dataset_path ${MIMIC3PATH} \
     --ICL 1
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for mortality prediction, mimic3, ICL"
 fi
 
 # mimic4, mortality
@@ -77,14 +79,15 @@ python convert.py\
     --dataset_path ${MIMIC4PATH} \
     --ICL 0
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for mortality prediction, mimic4"
 fi
 
+echo "Preprocess prompt for mortality prediction, mimic4, ICL..."
 python convert.py\
     --dataset_path ${MIMIC4PATH} \
     --ICL 1
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for mortality prediction, mimic4, ICL"
 fi
 
 cd ../../../
@@ -96,14 +99,15 @@ python convert.py\
     --dataset_path ${MIMIC3PATH} \
     --ICL 0
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for readmission prediction, mimic3"
 fi
 
+echo "Preprocess prompt for readmission prediction, mimic3, ICL..."
 python convert.py\
     --dataset_path ${MIMIC3PATH} \
     --ICL 1
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for readmission prediction, mimic3, ICL"
 fi
 
 
@@ -114,14 +118,15 @@ python convert.py\
     --dataset_path ${MIMIC4PATH} \
     --ICL 0
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for readmission prediction, mimic4"
 fi
 
+echo "Preprocess prompt for readmission prediction, mimic4, ICL..."
 python convert.py\
     --dataset_path ${MIMIC4PATH} \
     --ICL 1
 if [ $? -ne 0 ]; then
-    echo "Error running convert.py"
+    echo "Error running convert.py for readmission prediction, mimic4, ICL"
 fi
 cd ../../../
 
