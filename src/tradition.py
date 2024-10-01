@@ -340,7 +340,6 @@ def main(args):
                 test_f1 = f1_score(test_labels, test_predictions)
         
         results[model_name] = (best_model, val_f1, test_f1)
-        breakpoint()
         with open(f'results/{task}/{dataset}/{task}_result_data_{model_name}_{random_index}_{ratio}.csv', 'w') as file:
             filenames = ['ANSWER', 'PREDICTION', 'PROB']
             writer = csv.DictWriter(file, fieldnames=filenames)
