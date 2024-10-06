@@ -177,7 +177,7 @@ def get_data_and_convert_to_features(task, dataset, random_index, ratio):
                 train_procedures.append(data[i]["procedures"])
                 train_drugs.append(data[i]["drugs"])
                 train_labels.append(data[i]["label"])
-                number1 -= 1
+                number0 -= 1
             elif data[i]["label"] == 1 and number1 > 0:
                 train_conditions.append(data[i]["conditions"])
                 train_procedures.append(data[i]["procedures"])
