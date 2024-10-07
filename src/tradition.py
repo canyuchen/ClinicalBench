@@ -20,28 +20,44 @@ import argparse
 
 
 
-
-
 def process_data(data):
-        for i in range(len(data)):
-            data[i] = data[i][0]
-            temp = ''
-            for j in range(len(data[i])):
-                temp += str(data[i][j]) + ' '
-            data[i] = temp
+    for i in range(len(data)):
+        data[i] = data[i][0]
+        temp = ''
+        for j in range(len(data[i])):
+            temp += str(data[i][j]) + ' '
+        data[i] = temp
       
 def adjust_labels(labels):
     return labels - 1
 
+def convert_age(age):
+    if age < 30:
+        return "less than 30 years old"
+    elif age < 40:
+        return "30 to 39 years old"
+    elif age < 50:
+        return "40 to 49 years old"
+    elif age < 60:
+        return "50 to 59 years old"
+    elif age < 70:
+        return "60 to 69 years old"
+    else:
+        return "70 years old or older"
+
+def convert_gender(gender):
+    return "Male" if gender == 'M' else "Female"
+
 def train_validate_and_evaluate(model, model_name, train_features, train_labels, val_features, val_labels, test_features, test_labels, task):
     print(f"\nTraining and evaluating {model_name}...")
-
     best_val_f1 = -1
     best_model = None
-
-    for i in range(20): 
+    epochs = 20
+    if model_name in ['XGBoost', 'LogisticRegression', 'AdaBoost', 'SVM', 'NaiveBayes', 'KNN']:
+        epochs = 1
+    for i in range(epochs): 
         current_model = clone(model)
-        current_model.random_state = i 
+        current_model.random_state = i
         current_model.fit(train_features, train_labels)
         val_pred = current_model.predict(val_features)
         if task == 'length_pred':
@@ -52,13 +68,18 @@ def train_validate_and_evaluate(model, model_name, train_features, train_labels,
         if val_f1 > best_val_f1:
             best_val_f1 = val_f1
             best_model = current_model
+        
+        print(f'Validation f1: {val_f1:.4f}')
 
     print(f'{model_name} Best Validation f1: {best_val_f1:.4f}')
 
     y_pred = best_model.predict(test_features)
-    test_f1 = f1_score(test_labels, y_pred, average='macro')
+    if task == 'length_pred':
+        test_f1 = f1_score(test_labels, y_pred, average='macro')
+    else:
+        test_f1 = f1_score(test_labels, y_pred)
     print(f'{model_name} Test f1: {test_f1:.4f}')
-    
+
     return best_model, best_val_f1, test_f1
 
 def train_dl_model(model, train_features, train_labels, val_features, val_labels, task, batch_size=32, num_epochs=20):
@@ -114,6 +135,7 @@ def evaluate_dl_model(model, test_features, test_labels, task):
             test_f1 = f1_score(test_labels, test_preds.cpu().numpy(), average='macro')
         else:
             test_f1 = f1_score(test_labels, test_preds.cpu().numpy())
+    print(f'Test f1: {test_f1:.4f}')
     return test_f1, test_preds.cpu().numpy(), test_probs
 
 def get_data_and_convert_to_features(task, dataset, random_index, ratio):
@@ -133,14 +155,20 @@ def get_data_and_convert_to_features(task, dataset, random_index, ratio):
     train_procedures = []
     train_drugs = []
     train_labels = []
+    train_ages = []
+    train_genders = []
     val_conditions = []
     val_procedures = []
     val_drugs = []
     val_labels = []
+    val_ages = []
+    val_genders = []
     test_conditions = []
     test_procedures = []
     test_drugs = []
     test_labels = []
+    test_ages = []
+    test_genders = []
 
 
     # length pred: 1, 2, 3. mortality pred: 0, 1. readmission pred: 0, 1
@@ -168,7 +196,6 @@ def get_data_and_convert_to_features(task, dataset, random_index, ratio):
     number1 = number1 * ratio
     number2 = number2 * ratio
     number3 = number3 * ratio
-        
 
     for i in range(len(data)):
         if data[i]["visit_id"] in train_index:
@@ -177,24 +204,32 @@ def get_data_and_convert_to_features(task, dataset, random_index, ratio):
                 train_procedures.append(data[i]["procedures"])
                 train_drugs.append(data[i]["drugs"])
                 train_labels.append(data[i]["label"])
+                train_ages.append([[convert_age(data[i]["age"])]])
+                train_genders.append([[convert_gender(data[i]["gender"])]])
                 number0 -= 1
             elif data[i]["label"] == 1 and number1 > 0:
                 train_conditions.append(data[i]["conditions"])
                 train_procedures.append(data[i]["procedures"])
                 train_drugs.append(data[i]["drugs"])
                 train_labels.append(data[i]["label"])
+                train_ages.append([[convert_age(data[i]["age"])]])
+                train_genders.append([[convert_gender(data[i]["gender"])]])
                 number1 -= 1
             elif data[i]["label"] == 2 and number2 > 0:
                 train_conditions.append(data[i]["conditions"])
                 train_procedures.append(data[i]["procedures"])
                 train_drugs.append(data[i]["drugs"])
                 train_labels.append(data[i]["label"])
+                train_ages.append([[convert_age(data[i]["age"])]])
+                train_genders.append([[convert_gender(data[i]["gender"])]])
                 number2 -= 1
             elif data[i]["label"] == 3 and number3 > 0:
                 train_conditions.append(data[i]["conditions"])
                 train_procedures.append(data[i]["procedures"])
                 train_drugs.append(data[i]["drugs"])
                 train_labels.append(data[i]["label"])
+                train_ages.append([[convert_age(data[i]["age"])]])
+                train_genders.append([[convert_gender(data[i]["gender"])]])
                 number3 -= 1
 
         elif data[i]["visit_id"] in val_index:
@@ -202,27 +237,37 @@ def get_data_and_convert_to_features(task, dataset, random_index, ratio):
             val_procedures.append(data[i]["procedures"])
             val_drugs.append(data[i]["drugs"])
             val_labels.append(data[i]["label"])
+            val_ages.append([[convert_age(data[i]["age"])]])
+            val_genders.append([[convert_gender(data[i]["gender"])]])
         elif data[i]["visit_id"] in test_index:
             test_conditions.append(data[i]["conditions"])
             test_procedures.append(data[i]["procedures"])
             test_drugs.append(data[i]["drugs"])
             test_labels.append(data[i]["label"])
+            test_ages.append([[convert_age(data[i]["age"])]])
+            test_genders.append([[convert_gender(data[i]["gender"])]])
 
     train_labels = np.array(train_labels)
     val_labels = np.array(val_labels)
     test_labels = np.array(test_labels)
 
-
+    print(f"Train: {len(train_labels)}, Val: {len(val_labels)}, Test: {len(test_labels)}")
 
     process_data(train_conditions)
     process_data(train_procedures)
     process_data(train_drugs)
+    process_data(train_ages)
+    process_data(train_genders)
     process_data(val_conditions)
     process_data(val_procedures)
     process_data(val_drugs)
+    process_data(val_ages)
+    process_data(val_genders)
     process_data(test_conditions)
     process_data(test_procedures)
     process_data(test_drugs)
+    process_data(test_ages)
+    process_data(test_genders)
 
     # Use CountVectorizer to convert text data to vectors
     vectorizer_conditions = CountVectorizer(max_features=2000)
@@ -233,6 +278,8 @@ def get_data_and_convert_to_features(task, dataset, random_index, ratio):
     train_conditions_vec = vectorizer_conditions.fit_transform(train_conditions)
     train_procedures_vec = vectorizer_procedures.fit_transform(train_procedures)
     train_drugs_vec = vectorizer_drugs.fit_transform(train_drugs)
+
+
     val_conditions_vec = vectorizer_conditions.transform(val_conditions)
     val_procedures_vec = vectorizer_procedures.transform(val_procedures)
     val_drugs_vec = vectorizer_drugs.transform(val_drugs)
@@ -240,11 +287,21 @@ def get_data_and_convert_to_features(task, dataset, random_index, ratio):
     test_procedures_vec = vectorizer_procedures.transform(test_procedures)
     test_drugs_vec = vectorizer_drugs.transform(test_drugs)
 
-    # concatenate the features
-    train_features = np.hstack([train_conditions_vec.toarray(), train_procedures_vec.toarray(), train_drugs_vec.toarray()])
-    val_features = np.hstack([val_conditions_vec.toarray(), val_procedures_vec.toarray(), val_drugs_vec.toarray()])
-    test_features = np.hstack([test_conditions_vec.toarray(), test_procedures_vec.toarray(), test_drugs_vec.toarray()])
+    # use CountVectorizer to convert age and gender data to vectors
+    vectorizer_age = CountVectorizer(max_features=10)
+    vectorizer_gender = CountVectorizer(max_features=5)
+    train_ages_vec = vectorizer_age.fit_transform(train_ages)
+    train_genders_vec = vectorizer_gender.fit_transform(train_genders)
+    val_ages_vec = vectorizer_age.transform(val_ages)
+    val_genders_vec = vectorizer_gender.transform(val_genders)
+    test_ages_vec = vectorizer_age.transform(test_ages)
+    test_genders_vec = vectorizer_gender.transform(test_genders)
 
+
+    # concatenate the features
+    train_features = np.hstack([train_conditions_vec.toarray(), train_procedures_vec.toarray(), train_drugs_vec.toarray(), train_ages_vec.toarray(), train_genders_vec.toarray()])
+    val_features = np.hstack([val_conditions_vec.toarray(), val_procedures_vec.toarray(), val_drugs_vec.toarray(), val_ages_vec.toarray(), val_genders_vec.toarray()])
+    test_features = np.hstack([test_conditions_vec.toarray(), test_procedures_vec.toarray(), test_drugs_vec.toarray(), test_ages_vec.toarray(), test_genders_vec.toarray()])  
     if task == 'length_pred':
         train_labels = adjust_labels(train_labels)
         val_labels = adjust_labels(val_labels)
@@ -298,6 +355,8 @@ def main(args):
     dataset = args.dataset
     random_index = args.random_index
     ratio = args.ratio
+    
+    ratio_str = "_" + str(ratio) if ratio != 1 else ""
 
     train_features, train_labels, val_features, val_labels, test_features, test_labels = get_data_and_convert_to_features(task, dataset, random_index, ratio)
 
@@ -314,7 +373,6 @@ def main(args):
         'NaiveBayes': GaussianNB(),
         'KNN': KNeighborsClassifier(n_neighbors=5),
         'NeuralNetwork': MLPClassifier(hidden_layer_sizes=(100,), max_iter=1000),
-        
     }
 
     # train
@@ -334,13 +392,9 @@ def main(args):
             )
             test_predictions = best_model.predict(test_features)
             test_probs = best_model.predict_proba(test_features)[:, -1]
-            if task == 'length_pred':
-                test_f1 = f1_score(test_labels, test_predictions, average='macro')
-            else:
-                test_f1 = f1_score(test_labels, test_predictions)
         
         results[model_name] = (best_model, val_f1, test_f1)
-        with open(f'results/{task}/{dataset}/{task}_result_data_{model_name}_{random_index}_{ratio}.csv', 'w') as file:
+        with open(f'results/{task}/{dataset}/{task}_result_data_{model_name}_{random_index}{ratio_str}.csv', 'w') as file:
             filenames = ['ANSWER', 'PREDICTION', 'PROB']
             writer = csv.DictWriter(file, fieldnames=filenames)
             writer.writeheader()
