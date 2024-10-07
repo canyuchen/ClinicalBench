@@ -86,12 +86,14 @@ llm4clinical_prediction_release/
 
 In this process, we first convert the Electronic Health Record (EHR) data into a structured format centered around each patient's initial visit. We then transform this structured data into prompts that Large Language Models (LLMs) can interpret.
 
-All converted data will be saved at `data` folder.
+All converted data will be saved in `data` folder.
 
 We prepared several index files in `data/{task}/{dataset}`:
 
 Indices 0-4 represent datasets created using different shuffle seeds. Each dataset is split into training, validation, and test sets with a ratio of 0.7:0.1:0.2. The training set is undersampled to achieve balance.
 Index 6: This is a sampled dataset that ensures the test set contains 500 samples while maintaining the same ratio for other splits. You can then choose which data to use by setting `random_index=`(see details below).
+
+You can also generate the index file by yourself using `get_index.py` in `data/{task}` folder
 
 ## Usage
 
@@ -186,7 +188,7 @@ If the task is length_pred, the code will use f1-macro automatically.
 
 ……
 
-## Acknowledgements
+## Acknowledgments
 
 This project has been developed partially under the funding of  [PyHealth](https://sunlabuiuc.github.io/PyHealth/). We thank the authors for providing this codebase and encourage further development to benefit the scientific community. 
 
