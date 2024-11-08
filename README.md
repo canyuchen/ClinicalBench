@@ -190,7 +190,7 @@ If the task is length_pred, the code will use f1-macro automatically.
 
 ## Acknowledgments
 
-This project has been developed partially under the funding of  [PyHealth](https://sunlabuiuc.github.io/PyHealth/). We thank the authors for providing this codebase and encourage further development to benefit the scientific community. 
+This project is partially based on [PyHealth](https://sunlabuiuc.github.io/PyHealth/). We thank the authors for providing this codebase and encourage further development to benefit the scientific community. 
 
 ## License
 
