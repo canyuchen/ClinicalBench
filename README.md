@@ -161,6 +161,8 @@ python calculate.py \
 
 If the task is length_pred, the code will use f1-macro automatically.
 
+For a more detailed description of how to reproduce the results in the paper, please refer to the [result_reproduction.md](result_reproduction.md)
+
 ### Supported Models
 
 [Llama3-8B]( https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct)
