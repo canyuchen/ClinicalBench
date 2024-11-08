@@ -1,6 +1,67 @@
 # Results Reproduction
 In this file, we will show how to reproduce the results in the paper.
 
+## Dataset Detail
+The process of making the dataset is as follows: firstly, the proportion of all the data is counted, and then the appropriate amount of data is selected in equal proportions as the temporary training set, validation set and test set with ratio of 5:1:4. After that, the training set is downsampled so that the amount of training data for each label is the same.
+
+The random_seed is used to form five different data sets to realize the effect of 5 runs, corresponding to random_index 0 to 4.
+
+And for the case of specifying a sample size of 500 test sets, the operation is the same as above, except that it is scaled down in equal proportions, corresponding to random_index 6.
+
+The detailed data volume is shown in the table below:
+
+- Length-of-Stay prediction, random_index 0 to 4
+
+| label | 1 | 2 | 3 |
+|-------|---|---|---|
+| train | 2980 | 2980 | 2980 |
+| val | 1200 | 596 | 425 |
+| test | 2400 | 1192 | 851 |
+
+
+- Mortality prediction, random_index 0 to 4
+
+| label | 0 | 1 |
+|-------|---|---|
+| train | 2100 | 2100 |
+| val | 2273 | 300 |
+| test | 4546 | 600 |
+| all | 22731 | 3000 |
+
+- Readmission prediction, random_index 0 to 4
+
+| label | 0 | 1 |
+|-------|---|---|
+| train | 277 | 277 |
+| val | 500 | 40 |
+| test | 1000 | 79 |
+| all | 5000 | 396 |
+
+- Length-of-Stay prediction, random_index 6
+
+| label | 1 | 2 | 3 |
+|-------|---|---|---|
+| train | 335 | 335 | 335 |
+| val | 135 | 67 | 48 |
+| test | 270 | 134 | 96 |
+
+- Mortality prediction, random_index 6
+
+| label | 0 | 1 |
+|-------|---|---|
+| train | 204 | 204 |
+| val | 221 | 29 |
+| test | 442 | 58 |
+
+- Readmission prediction, random_index 6
+
+| label | 0 | 1 |
+|-------|---|---|
+| train | 128 | 128 |
+| val | 232 | 18 |
+| test | 463 | 37 |
+
+
 ## Table 1
 In this table, the case of LLMs with the results of five runs of traditional ML models is represented.
 
