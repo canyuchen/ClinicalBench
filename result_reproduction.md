@@ -227,7 +227,68 @@ python tradition.py \
     --ratio 0.4
 ```
 
-`results/{task}/{dataset}/{task}_result_data_{model_name}_{random_index}_{ratio}`
+The results will be saved as `results/{task}/{dataset}/{task}_result_data_{model_name}_{random_index}_{ratio}`
 
 Use the `calculate.py` to calculate the F1 results and AUROC results. Then calculate the ranges of performance with 95% Confidence Interval to get the results in table 1.
 
+## Figure 3
+In this figure, the results of using different temperature to test LLMs are represented.
+
+Take LLama3-Instruct, MIMIC-III dataset, mortality prediction task as an example:
+
+```
+python test.py \
+	--base_model meta-llama/Meta-Llama-3-8B-Instruct \ 
+	--dataset mimic3 \
+	--task mortality_pred \
+	--mode ORI \
+	--random_index 0 \
+	--temperature 0.2
+
+python test.py \
+	--base_model meta-llama/Meta-Llama-3-8B-Instruct \ 
+	--dataset mimic3 \
+	--task mortality_pred \
+	--mode ORI \
+	--random_index 0 \
+	--temperature 0.4
+
+python test.py \
+	--base_model meta-llama/Meta-Llama-3-8B-Instruct \ 
+	--dataset mimic3 \
+	--task mortality_pred \
+	--mode ORI \
+	--random_index 0 \
+	--temperature 0.6
+
+python test.py \
+	--base_model meta-llama/Meta-Llama-3-8B-Instruct \ 
+	--dataset mimic3 \
+	--task mortality_pred \
+	--mode ORI \
+	--random_index 0 \
+	--temperature 0.8
+
+python test.py \
+	--base_model meta-llama/Meta-Llama-3-8B-Instruct \ 
+	--dataset mimic3 \
+	--task mortality_pred \
+	--mode ORI \
+	--random_index 0 \
+	--temperature 1
+```
+
+The results will be saved as `results/{task}/{dataset}/{task}_result_data_{model_name}_0_{temperature}.csv`
+
+## Figure 4
+This figure shows the results of fine-tuning the LLMs. The division of the training, validation and test sets for fine-tuning is the same as in the previous case of setting `random_index=6` to facilitate training and comparison with previous results
+
+We use [LLama Factory](https://github.com/hiyouga/LLaMA-Factory) to fine-tuning the models. 
+
+The structure of training data is like this:
+
+{'instruction': "Given the patient information, predict the number of weeks of stay in hospital.\nAnswer 1 if no more than one week,\nAnswer 2 if more than one week but not more than two weeks,\nAnswer 3 if more than two weeks.\nAnswer with only the number", 'input': input, 'output': output}
+
+{'instruction': 'Given the patient information, predict the mortality of the patient.\nAnswer 1 if the patient will die, answer 0 otherwise.\nAnswer with only the number', 'input': input, 'output': output}
+
+{'instruction': 'Given the patient information, predict the readmission of the patient.\nAnswer 1 if the patient will be readmitted to the hospital within two weeks, answer 0 otherwise.\nAnswer with only the number', 'input': input, 'output': output}
