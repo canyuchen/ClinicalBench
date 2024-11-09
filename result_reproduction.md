@@ -281,14 +281,6 @@ python test.py \
 The results will be saved as `results/{task}/{dataset}/{task}_result_data_{model_name}_0_{temperature}.csv`
 
 ## Figure 4
-This figure shows the results of fine-tuning the LLMs. The division of the training, validation and test sets for fine-tuning is the same as in the previous case of setting `random_index=6` to facilitate training and comparison with previous results
+This figure shows the results of fine-tuning the LLMs. The division of the training, validation and test sets for fine-tuning is the same as in the previous case of setting `random_index=6`(test set size 500) to facilitate training and comparison with previous results
 
-We use [LLama Factory](https://github.com/hiyouga/LLaMA-Factory) to fine-tuning the models. 
-
-The structure of training data is like this:
-
-{'instruction': "Given the patient information, predict the number of weeks of stay in hospital.\nAnswer 1 if no more than one week,\nAnswer 2 if more than one week but not more than two weeks,\nAnswer 3 if more than two weeks.\nAnswer with only the number", 'input': input, 'output': output}
-
-{'instruction': 'Given the patient information, predict the mortality of the patient.\nAnswer 1 if the patient will die, answer 0 otherwise.\nAnswer with only the number', 'input': input, 'output': output}
-
-{'instruction': 'Given the patient information, predict the readmission of the patient.\nAnswer 1 if the patient will be readmitted to the hospital within two weeks, answer 0 otherwise.\nAnswer with only the number', 'input': input, 'output': output}
+We use [LLama Factory](https://github.com/hiyouga/LLaMA-Factory) to fine-tuning the models. For more detail about the fine-tuning data, please refer to the appendix of the paper.
