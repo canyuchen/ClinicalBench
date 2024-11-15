@@ -197,3 +197,14 @@ This project is partially based on [PyHealth](https://sunlabuiuc.github.io/PyHea
 ## License
 
 This source code is released under the MIT license. We do not own any of the datasets used or included in this repository.
+
+## Citation
+If you find our paper or code useful, we will greatly appreacite it if you could consider citing our paper:
+```
+@article{chen2024clinicalbench,
+      title   = {ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?},
+      author  = {Canyu Chen and Jian Yu and Shan Chen and Che Liu and Zhongwei Wan and Danielle Bitterman and Fei Wang and Kai Shu},
+      year    = {2024},
+      journal = {arXiv preprint arXiv: 2411.06469}
+    }
+```
