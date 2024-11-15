@@ -1,6 +1,9 @@
-# ClinicalBench
+# ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?
 
-ClinicalBench provides a benchmark for doing clinical predictions with Large Language Models(LLMs) on Intensive Care Unit (ICU) EHR data.
+- **TLDR** : We discover that both general-purpose and medical LLMs, even with different model scales, diverse prompting or fine-tuning strategies, <b>still cannot beat traditional ML models in clinical prediction yet</b>, shedding light on their <b><i>potential deficiency in clinical reasoning and decision-making</i></b>.
+- **Authors** : <a href="https://canyuchen.com">Canyu Chen</a>\*, Jian Yu\*,  <a href="https://shanchen.dev/">Shan Chen</a>, <a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&hl=zh-CN&user=HED_458AAAAJ&sortby=pubdate">Che Liu</a>, <a href="https://scholar.google.com/citations?hl=zh-CN&user=EVj1cNoAAAAJ&view_op=list_works">Zhongwei Wan</a>, <a href="https://www.bittermanlab.org/">Danielle S. Bitterman</a>, <a href="https://wcm-wanglab.github.io/">Fei Wang</a>, <a href="https://www.cs.emory.edu/~kshu5/">Kai Shu</a> (*equal contributions)
+- **Paper** : [Read our paper](https://arxiv.org/abs/2411.06469)
+- **Project Website**: [https://clinicalbench.github.io](https://clinicalbench.github.io)
 
 ## Abstract
 
