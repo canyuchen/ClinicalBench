@@ -38,6 +38,7 @@ Download the environment
 
 ```shell
 conda create -n clibench python=3.8
+conda activate clibench
 pip install .
 cd src
 ```
