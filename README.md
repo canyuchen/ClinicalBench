@@ -30,8 +30,8 @@ Clone the repository
 
 
 ```shell
-git clone https://github.com/canyuchen/llm4clinical_prediction
-cd llm4clinical_prediction
+git clone https://github.com/canyuchen/ClinicalBench.git
+cd ClinicalBench
 ```
 
 Download the environment
