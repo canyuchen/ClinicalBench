@@ -62,19 +62,6 @@ Welcome to PyHealth!
 ..    :alt: License
 
 
-Citing PyHealth :handshake:
-----------------------------------
- Yang, Chaoqi, Zhenbang Wu, Patrick Jiang, Zhen Lin, Junyi Gao, Benjamin P. Danek, and Jimeng Sun. 2023. “PyHealth: A Deep Learning Toolkit for Healthcare Applications.” In Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining, 5788–89. KDD ’23. New York, NY, USA: Association for Computing Machinery.
-
-.. code-block:: bibtex
-
-    @inproceedings{pyhealth2023yang,
-        author = {Yang, Chaoqi and Wu, Zhenbang and Jiang, Patrick and Lin, Zhen and Gao, Junyi and Danek, Benjamin and Sun, Jimeng},
-        title = {{PyHealth}: A Deep Learning Toolkit for Healthcare Predictive Modeling},
-        url = {https://github.com/sunlabuiuc/PyHealth},
-        booktitle = {Proceedings of the 27th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD) 2023},
-        year = {2023}
-    }
 
 Checkout Our KDD'23 Tutorial https://sunlabuiuc.github.io/PyHealth/
 -----------------------------------------------------------------
