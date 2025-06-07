@@ -1,80 +1,9 @@
 Welcome to PyHealth!
 ====================================
 
-.. image:: https://img.shields.io/pypi/v/pyhealth.svg?color=brightgreen
-   :target: https://pypi.org/project/pyhealth/
-   :alt: PyPI version
-
-
-.. image:: https://readthedocs.org/projects/pyhealth/badge/?version=latest
-   :target: https://pyhealth.readthedocs.io/en/latest/
-   :alt: Documentation status
-   
-
-.. image:: https://img.shields.io/github/stars/sunlabuiuc/pyhealth.svg
-   :target: https://github.com/sunlabuiuc/pyhealth/stargazers
-   :alt: GitHub stars
-
-
-.. image:: https://img.shields.io/github/forks/sunlabuiuc/pyhealth.svg?color=blue
-   :target: https://github.com/sunlabuiuc/pyhealth/network
-   :alt: GitHub forks
-
-
-.. image:: https://static.pepy.tech/badge/pyhealth
-   :target: https://pepy.tech/project/pyhealth
-   :alt: Downloads
-
-
-.. image:: https://img.shields.io/badge/Tutorials-Google%20Colab-red
-   :target: https://pyhealth.readthedocs.io/en/latest/tutorials.html
-   :alt: Tutorials
-
-
-.. image:: https://img.shields.io/badge/YouTube-16%20Videos-red
-   :target: https://www.youtube.com/playlist?list=PLR3CNIF8DDHJUl8RLhyOVpX_kT4bxulEV
-   :alt: YouTube
-
-
-
-.. -----
-
-
-.. **Build Status & Coverage & Maintainability & License**
-
-.. .. image:: https://travis-ci.org/yzhao062/pyhealth.svg?branch=master
-..    :target: https://travis-ci.org/yzhao062/pyhealth
-..    :alt: Build Status
-
-
-.. .. image:: https://ci.appveyor.com/api/projects/status/1kupdy87etks5n3r/branch/master?svg=true
-..    :target: https://ci.appveyor.com/project/yzhao062/pyhealth/branch/master
-..    :alt: Build status
-
-
-.. .. image:: https://api.codeclimate.com/v1/badges/bdc3d8d0454274c753c4/maintainability
-..    :target: https://codeclimate.com/github/yzhao062/pyhealth/maintainability
-..    :alt: Maintainability
-
-
-.. .. image:: https://img.shields.io/github/license/yzhao062/pyhealth
-..    :target: https://github.com/yzhao062/pyhealth/blob/master/LICENSE
-..    :alt: License
-
-
-
-Checkout Our KDD'23 Tutorial https://sunlabuiuc.github.io/PyHealth/
------------------------------------------------------------------
-
 
 PyHealth is a comprehensive deep learning toolkit for supporting clinical predictive modeling, which is designed for both **ML researchers and medical practitioners**. We can make your **healthcare AI applications** easier to deploy and more flexible and customizable. `[Tutorials] <https://pyhealth.readthedocs.io/>`_
 
- **[News!]** We are continueously implemeting good papers and benchmarks into PyHealth, checkout the `[planned List] <https://docs.google.com/spreadsheets/d/1PNMgDe-llOm1SM5ZyGLkmPysjC4wwaVblPLAHLxejTw/edit#gid=159213380>`_. Welcome to pick one from the list and send us a PR or add more influential and new papers into the plan list.
-
-.. image:: figure/poster.png
-   :width: 810
-
-..
 
 1. Installation :rocket:
 ----------------------------
