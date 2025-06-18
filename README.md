@@ -1,5 +1,10 @@
 # ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?
 
+- **TLDR** : We discover that both general-purpose and medical LLMs, even with different model scales, diverse prompting or fine-tuning strategies, <b>still cannot beat traditional ML models in clinical prediction yet</b>, shedding light on their <b><i>potential deficiency in clinical reasoning and decision-making</i></b>.
+- **Authors** : <a href="https://canyuchen.com">Canyu Chen</a>\*, Jian Yu\*,  <a href="https://shanchen.dev/">Shan Chen</a>, <a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&hl=zh-CN&user=HED_458AAAAJ&sortby=pubdate">Che Liu</a>, <a href="https://scholar.google.com/citations?hl=zh-CN&user=EVj1cNoAAAAJ&view_op=list_works">Zhongwei Wan</a>, <a href="https://www.bittermanlab.org/">Danielle S. Bitterman</a>, <a href="https://wcm-wanglab.github.io/">Fei Wang</a>, <a href="https://www.cs.emory.edu/~kshu5/">Kai Shu</a> (*equal contributions)
+- **Paper** : [Read our paper](https://arxiv.org/abs/2411.06469)
+- **Project Website**: [https://clinicalbench.github.io](https://clinicalbench.github.io)
+
 
 ## Abstract
 
@@ -24,7 +29,10 @@ We provide three common tasks for clinical prediction:
 
 Clone the repository
 
-
+```shell
+git clone https://github.com/canyuchen/ClinicalBench.git
+cd ClinicalBench
+```
 
 
 Download the environment
@@ -192,6 +200,17 @@ For a more detailed description of how to reproduce the results in the paper, pl
 This project is partially based on [PyHealth](https://sunlabuiuc.github.io/PyHealth/). We thank the authors for providing this codebase and encourage further development to benefit the scientific community. 
 
 ## License
+
+## Citation
+If you find our paper or code useful, we will greatly appreacite it if you could consider citing our paper:
+```
+@article{chen2024clinicalbench,
+      title   = {ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?},
+      author  = {Canyu Chen and Jian Yu and Shan Chen and Che Liu and Zhongwei Wan and Danielle Bitterman and Fei Wang and Kai Shu},
+      year    = {2024},
+      journal = {arXiv preprint arXiv: 2411.06469}
+    }
+```
 
 This source code is released under the MIT license. We do not own any of the datasets used or included in this repository.
 
