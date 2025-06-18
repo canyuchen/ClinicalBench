@@ -201,6 +201,8 @@ This project is partially based on [PyHealth](https://sunlabuiuc.github.io/PyHea
 
 ## License
 
+This source code is released under the MIT license. We do not own any of the datasets used or included in this repository.
+
 ## Citation
 If you find our paper or code useful, we will greatly appreacite it if you could consider citing our paper:
 ```
@@ -211,8 +213,4 @@ If you find our paper or code useful, we will greatly appreacite it if you could
       journal = {arXiv preprint arXiv: 2411.06469}
     }
 ```
-
-This source code is released under the MIT license. We do not own any of the datasets used or included in this repository.
-
-
 
