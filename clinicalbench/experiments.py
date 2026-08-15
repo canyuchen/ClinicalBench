@@ -136,6 +136,14 @@ def check(runs: List[Run], result_root: Path) -> int:
     missing = [r for r in runs if not r.result_file(result_root).exists()]
     present = len(runs) - len(missing)
     print(f"{present}/{len(runs)} cells have a result file under {result_root}/")
+    if present == 0 and not any(Path(result_root).glob("*/*/*.csv")):
+        # the usual cause is a fresh clone: the results live on the Hub
+        print(
+            "\nNo result files found at all. The released results are not in git;\n"
+            "fetch them with:\n"
+            "    clinicalbench-fetch-results"
+        )
+        return len(missing)
     if missing:
         print(f"\nmissing ({len(missing)}):")
         by_model: Dict[str, int] = {}

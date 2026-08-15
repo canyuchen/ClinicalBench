@@ -35,3 +35,9 @@ ENV/
 
 # GitHub Actions workflows are kept local-only for now
 .github/
+
+# Released results live on the Hugging Face Hub, not in git. The directory is
+# kept (with its README) so downloads have somewhere to land and the default
+# --result_root works unchanged.
+results/*
+!results/README.md

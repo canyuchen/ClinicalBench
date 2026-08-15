@@ -13,9 +13,8 @@ from pathlib import Path
 
 import pytest
 
+from _results import RESULTS_ROOT, requires_results
 from clinicalbench.naming import mode_suffix, ratio_suffix, result_filename, temperature_suffix
-
-RESULTS_ROOT = Path(__file__).parent.parent / "results"
 
 
 def test_greedy_and_full_training_set_add_no_suffix():
@@ -39,7 +38,7 @@ def test_unknown_mode_is_rejected():
         mode_suffix("NOPE")
 
 
-@pytest.mark.skipif(not RESULTS_ROOT.exists(), reason="results not present")
+@requires_results
 def test_every_temperature_file_is_reconstructible():
     """Regenerate each released temperature filename from its parsed parts."""
     checked = 0
@@ -53,7 +52,7 @@ def test_every_temperature_file_is_reconstructible():
     assert checked > 0, "no temperature results found to check"
 
 
-@pytest.mark.skipif(not RESULTS_ROOT.exists(), reason="results not present")
+@requires_results
 def test_every_ratio_file_is_reconstructible():
     checked = 0
     for path in RESULTS_ROOT.glob("*/*/*.csv"):

@@ -16,10 +16,9 @@ import pytest
 from clinicalbench.eval.metrics import score_file
 from clinicalbench.naming import result_path
 
-RESULTS_ROOT = Path(__file__).parent.parent / "results"
-pytestmark = pytest.mark.skipif(
-    not RESULTS_ROOT.exists(), reason="released results not present"
-)
+from _results import RESULTS_ROOT, requires_results
+
+pytestmark = requires_results
 
 # Table 1, MIMIC-III: (mean, 95% CI) over random_index 0-4.
 TABLE_1 = [

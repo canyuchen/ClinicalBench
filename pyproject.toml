@@ -52,11 +52,14 @@ llm = [
     "einops",
 ]
 dev = ["pytest>=7"]
+# Needed only to download the released results; everything else works without it.
+hub = ["huggingface_hub>=0.23"]
 
 [project.urls]
 Homepage = "https://clinicalbench.github.io"
 Paper = "https://arxiv.org/abs/2411.06469"
 Repository = "https://github.com/canyuchen/ClinicalBench"
+Results = "https://huggingface.co/datasets/canyuchen/clinicalbench-results"
 
 [project.scripts]
 clinicalbench-build-cohort = "clinicalbench.data.build_cohort:main"
@@ -66,6 +69,7 @@ clinicalbench-llm = "clinicalbench.inference.llm:main"
 clinicalbench-baselines = "clinicalbench.baselines.traditional:main"
 clinicalbench-score = "clinicalbench.eval.metrics:main"
 clinicalbench-table = "clinicalbench.eval.aggregate:main"
+clinicalbench-fetch-results = "clinicalbench.eval.fetch:main"
 
 [tool.setuptools.packages.find]
 include = ["clinicalbench*"]

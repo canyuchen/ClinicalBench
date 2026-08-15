@@ -6,6 +6,7 @@
 [![Paper](https://img.shields.io/badge/paper-arXiv%3A2411.06469-b31b1b)](https://arxiv.org/abs/2411.06469)
 [![Venue](https://img.shields.io/badge/KDD-2026-1f6feb)](https://kdd.org/kdd2026/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Results](https://img.shields.io/badge/%F0%9F%A4%97%20results-clinicalbench--results-yellow)](https://huggingface.co/datasets/canyuchen/clinicalbench-results)
 
 > **Not yet.** Both general-purpose and medical LLMs — across model scales, prompting
 > strategies, and fine-tuning — still cannot beat traditional ML models on clinical
@@ -65,7 +66,9 @@ in this repository:
 ## What is here
 
 - **All 3,015 result files** behind the paper, so every number can be re-scored
-  without a GPU — 99.1% of the runs the paper's configs stand for.
+  without a GPU — 99.1% of the runs the paper's configs stand for. They live in
+  a gated dataset on the Hub, [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results); one
+  command pulls them in.
 - **A config per table and figure**, expanding into the exact commands that
   produced it.
 - **The cohort index files**, so splits are identical to the published ones.
@@ -90,7 +93,7 @@ clinicalbench/
 
 configs/paper/             one config per table and figure
 data/{task}/{dataset}/     cohort index files (.npy)
-results/{task}/{dataset}/  released model outputs
+results/                   released model outputs, fetched from the Hub
 docs/                      installation, data prep, reproduction, methodology
 scripts/                   data-preparation shell entry point
 tests/                     104 tests, no GPU or MIMIC access required
@@ -111,7 +114,15 @@ Details in [docs/installation.md](docs/installation.md).
 **Re-score the paper without touching a GPU:**
 
 ```shell
+clinicalbench-fetch-results     # 295 MB from the Hub into results/
 python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
+```
+
+Or read the precomputed metrics without downloading anything:
+
+```python
+import pandas as pd
+df = pd.read_csv("hf://datasets/canyuchen/clinicalbench-results/summary.csv")
 ```
 
 **See what a table costs and what is already done:**
@@ -167,7 +178,7 @@ Full commands, and the one remaining gap, in
 | [reproduction.md](docs/reproduction.md) | config-to-table map, individual runs, modes, determinism |
 | [methodology.md](docs/methodology.md) | invalid-answer scoring, the two scoring paths, model selection, caveats |
 | [fine_tuning.md](docs/fine_tuning.md) | LLaMA-Factory dataset export, LoRA settings, evaluation |
-| [results/README.md](results/README.md) | file naming, columns, coverage |
+| [results/README.md](results/README.md) | fetching the results, file naming, columns, coverage |
 
 **Read [methodology.md](docs/methodology.md) before quoting a number.** Two
 things there change how results should be read: unparseable LLM answers are

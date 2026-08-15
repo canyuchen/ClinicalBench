@@ -10,6 +10,7 @@ does not require a GPU stack.
 | Base | `pip install -e .` | cohort building, the 11 traditional baselines, and scoring every released result file |
 | With LLM inference | `pip install -e ".[llm]"` | the above plus `transformers`, `accelerate`, `peft` for running LLMs |
 | Development | `pip install -e ".[llm,dev]"` | the above plus `pytest` |
+| With result download | add `hub`, e.g. `pip install -e ".[hub]"` | `huggingface_hub`, for `clinicalbench-fetch-results` |
 
 ```shell
 conda create -n clinicalbench python=3.10
@@ -26,7 +27,9 @@ PyHealth readers require.
 pytest tests/ -q
 ```
 
-104 tests, no GPU and no MIMIC access needed. They check that the cohort spec
+104 tests, no GPU and no MIMIC access needed. The ones that score released
+result files skip unless you have fetched them (`clinicalbench-fetch-results`);
+the rest always run. They check that the cohort spec
 still matches the shipped index files, that the prompt builder reproduces the
 released prompts byte-for-byte, and that the evaluator still reproduces the
 paper's Table 1 numbers from the released result files.

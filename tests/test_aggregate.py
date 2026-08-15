@@ -6,9 +6,8 @@ from pathlib import Path
 
 import pytest
 
+from _results import RESULTS_ROOT, requires_results
 from clinicalbench.eval.aggregate import mean_ci95
-
-RESULTS_ROOT = Path(__file__).parent.parent / "results"
 
 
 def test_mean_ci95_uses_the_t_distribution_for_five_runs():
@@ -26,7 +25,7 @@ def test_mean_ci95_degenerate_inputs():
     assert half == 0.0 and mean != mean  # NaN mean, zero width
 
 
-@pytest.mark.skipif(not RESULTS_ROOT.exists(), reason="released results not present")
+@requires_results
 def test_aggregate_reproduces_table_1_xgboost():
     """The module-level path: config -> runs -> released files -> paper number."""
     import yaml

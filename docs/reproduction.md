@@ -4,6 +4,16 @@ Every table and figure has a config under `configs/paper/` that expands into the
 exact runs behind it, so the mapping from a published number to a command is
 mechanical.
 
+The released result files are not in git; fetch them first:
+
+```shell
+clinicalbench-fetch-results
+```
+
+They come from [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results) on the Hub, a gated
+dataset — accept the terms once, approval is automatic — and land in `results/`,
+so the default `--result_root` keeps working.
+
 ## The three verbs
 
 ```shell

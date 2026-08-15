@@ -1,10 +1,45 @@
 # Released results
 
-3,015 result files — every model output behind the paper's tables and figures.
-They are here so the numbers can be re-scored without re-running inference:
+The 3,015 result files behind the paper's tables and figures are hosted on the
+Hugging Face Hub rather than in git, so cloning this repository stays cheap:
+
+**[huggingface.co/datasets/canyuchen/clinicalbench-results](https://huggingface.co/datasets/canyuchen/clinicalbench-results)**
+
+The dataset is gated: accept the terms once, approval is automatic. The gate is
+there because these are patient-level outputs derived from MIMIC — see
+[Provenance](#provenance).
+
+## Getting them
+
+```shell
+clinicalbench-fetch-results          # downloads into ./results/
+```
+
+or equivalently:
+
+```shell
+hf download canyuchen/clinicalbench-results --repo-type dataset \
+    --local-dir . --include 'results/*'
+```
+
+Either lands the files in this directory, so the default `--result_root results`
+keeps working:
 
 ```shell
 python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
+```
+
+Without them the result-dependent tests skip and `--check` finds nothing;
+everything else in the repository works.
+
+## Looking without downloading
+
+`summary.csv` on the Hub has one row per run with F1, AUROC and the invalid-
+answer rate already computed — 3,006 rows, browsable in the dataset viewer:
+
+```python
+import pandas as pd
+df = pd.read_csv("hf://datasets/canyuchen/clinicalbench-results/summary.csv")
 ```
 
 ## Layout
