@@ -26,6 +26,17 @@
 
 ![framework](framework.png)
 
+## Updates
+
+- **2026-08** — `v1.0`: repository restructured into an installable
+  `clinicalbench` package. One config per paper table/figure, 99.1% of the
+  paper's runs re-scorable from the shipped results without a GPU, 101
+  regression tests, and the reproducibility fixes listed in
+  [docs/reproduction.md](docs/reproduction.md).
+- **2026** — ClinicalBench is accepted at **KDD 2026**.
+- **2024-11** — paper on [arXiv](https://arxiv.org/abs/2411.06469); initial
+  release of code and results.
+
 ## Overview
 
 ClinicalBench benchmarks **22 LLMs** (14 general-purpose, 8 medical) against
