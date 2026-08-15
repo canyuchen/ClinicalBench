@@ -32,3 +32,6 @@ venv/
 ENV/
 
 .ipynb_checkpoints
+
+# GitHub Actions workflows are kept local-only for now
+.github/
