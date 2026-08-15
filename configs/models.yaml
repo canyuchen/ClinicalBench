@@ -26,7 +26,13 @@ catalogue:
 
   # ---- medical LLMs (8 benchmarked in total) ----
   Meditron-7B:   epfl-llm/meditron-7b
-  Meditron-70B:  epfl-llm/meditron-70b
+  # Its prompt-engineering results (Table 5, random_index 6) were written under
+  # the name `Llama3-meditron-70b` rather than the `meditron-70b` the checkpoint
+  # id implies. Scoring those files reproduces the published Meditron-70B row
+  # exactly on all six columns, so the alias below points at them.
+  Meditron-70B:
+    id: epfl-llm/meditron-70b
+    result_aliases: [Llama3-meditron-70b]
   Medllama3-8B:  ProbeMedicalYonseiMAILab/medllama3-v20
   BioMistral-7B: BioMistral/BioMistral-7B
   Med42-8B:      m42-health/Llama3-Med42-8B

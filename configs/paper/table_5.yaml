@@ -10,8 +10,10 @@ produces: "Table 5 -- prompt engineering"
 datasets: [mimic3, mimic4]
 tasks: [length_pred, mortality_pred, readmission_pred]
 random_indices: [6]
-modes: [ICL, COT, RP, SR]
-scoring_by_mode: { ICL: logits, RP: logits, COT: generate, SR: generate }
+# The table shows each model's base row on the 500-sample cohort followed by
+# its + ICL / + CoT / + RP / + SR rows, so ORI belongs here too.
+modes: [ORI, ICL, COT, RP, SR]
+scoring_by_mode: { ORI: logits, ICL: logits, RP: logits, COT: generate, SR: generate }
 # NOTE: the released Meditron-70B prompt-engineering results are filed under
 # the name `Llama3-meditron-70b`, a different checkpoint from
 # `epfl-llm/meditron-70b` used elsewhere. Its HuggingFace id is not recorded

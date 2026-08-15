@@ -43,14 +43,14 @@ scored positionally against the test split rather than by patient id.
 
 ## Coverage
 
-2,433 of the 2,469 runs the paper's configs stand for (98.5%). Per config:
+2,505 of the 2,517 runs the paper's configs stand for (99.5%). Per config:
 
 ```shell
 python -m clinicalbench.experiments configs/paper/table_1.yaml --check
 ```
 
-Tables 1, 2, 4, 6 and Figure 3 are complete. The two gaps are documented in
-[docs/reproduction.md](../docs/reproduction.md#the-two-gaps).
+Everything except Figure 4 is complete; that gap is documented in
+[docs/reproduction.md](../docs/reproduction.md#the-remaining-gap).
 
 ## Models here that are not in the paper
 
@@ -61,10 +61,9 @@ table, and the roster in `configs/models.yaml` does not reference them.
 `Llama-2-70b-chat-hf`, `Llama3-OpenBioLLM-8B`, `MedLLaMA_13B`, `medalpaca-7b`,
 `vicuna-13b-v1.5`
 
-`Llama3-meditron-70b` is a special case: it holds the Table 5 Meditron-70B
-prompt-engineering results, under a checkpoint name that differs from the
-`epfl-llm/meditron-70b` used elsewhere. See
-[docs/reproduction.md](../docs/reproduction.md#the-two-gaps).
+`Llama3-meditron-70b` is not in that list: it holds Meditron-70B's Table 5
+results under a filename that differs from its checkpoint id, and
+`configs/models.yaml` maps it back with a `result_aliases` entry.
 
 Four stray `*_withprob.csv` files use a naming convention no current script
 produces; they predate the `--scoring logits` flag.

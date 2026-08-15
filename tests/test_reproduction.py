@@ -77,3 +77,47 @@ def test_auroc_needs_a_probability_column():
     path = result_path(RESULTS_ROOT, "length_pred", "mimic3", "Yi-1.5-34B-Chat", 0)
     with pytest.raises(ValueError, match="PROB"):
         score_file(path, "length_pred", with_auroc=True)
+
+
+# Table 5, Meditron-70B base row on the 500-sample cohort. These results were
+# written under the name `Llama3-meditron-70b`, so they only resolve through the
+# result_aliases entry in configs/models.yaml.
+TABLE_5_MEDITRON_70B = [
+    ("length_pred", "mimic3", 27.23),
+    ("length_pred", "mimic4", 34.52),
+    ("mortality_pred", "mimic3", 46.15),
+    ("mortality_pred", "mimic4", 34.48),
+    ("readmission_pred", "mimic3", 9.64),
+    ("readmission_pred", "mimic4", 9.90),
+]
+
+
+@pytest.mark.parametrize("task,dataset,paper_f1", TABLE_5_MEDITRON_70B)
+def test_meditron_70b_alias_resolves_to_table_5(task, dataset, paper_f1):
+    import yaml
+
+    from clinicalbench.experiments import expand, load_roster
+
+    config = yaml.safe_load(open(Path(__file__).parent.parent / "configs/paper/table_5.yaml"))
+    roster = load_roster(Path(__file__).parent.parent / "configs/models.yaml")
+    runs = [
+        r for r in expand(config, roster)
+        if r.model_name == "meditron-70b" and r.task == task
+        and r.dataset == dataset and r.mode == "ORI"
+    ]
+    assert len(runs) == 1, "expected exactly one Meditron-70B ORI cell"
+
+    path = runs[0].existing_result_file(RESULTS_ROOT)
+    assert path is not None, "alias did not resolve; check result_aliases in models.yaml"
+    assert path.name.count("Llama3-meditron-70b") == 1, "expected the alias filename"
+    assert score_file(path, task).f1 * 100 == pytest.approx(paper_f1, abs=0.01)
+
+
+def test_alias_lookup_falls_back_to_the_canonical_name():
+    """A model with no alias still resolves normally, and a miss returns None."""
+    from clinicalbench.experiments import Run
+
+    hit = Run("XGBoost", None, "mortality_pred", "mimic3", 0)
+    assert hit.existing_result_file(RESULTS_ROOT) is not None
+    miss = Run("NotAModel", None, "mortality_pred", "mimic3", 0)
+    assert miss.existing_result_file(RESULTS_ROOT) is None

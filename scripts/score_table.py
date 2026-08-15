@@ -62,8 +62,8 @@ def main() -> None:
     for run in runs:
         key = (run.dataset, run.task, run.model_name, run.mode, run.temperature, run.ratio)
         cell = cells[key]
-        path = run.result_file(args.result_root)
-        if not path.exists():
+        path = run.existing_result_file(args.result_root)
+        if path is None:
             cell["missing"] += 1
             continue
         try:

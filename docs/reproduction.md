@@ -38,26 +38,29 @@ mimic3   mortality_pred    Meta-Llama-3-8B-...  ORI      5   25.81 (25.55, 26.06
 | `table_1.yaml` | Table 1 — main results, MIMIC-III | index 0–4 | 360 | **360 (100%)** |
 | `table_2.yaml` | Table 2 — main results, MIMIC-IV (appendix) | index 0–4 | 360 | **360 (100%)** |
 | `table_4.yaml` | Table 4 — LLM scale vs baselines | index 0 | 96 | **96 (100%)** |
-| `table_5.yaml` | Table 5 — prompt engineering | index 6 | 96 | 72 (75%) |
+| `table_5.yaml` | Table 5 — prompt engineering | index 6 | 144 | **144 (100%)** |
 | `table_6.yaml` | Tables 6–8 — training-set scaling (appendix) | index 0–4 | 1320 | **1320 (100%)** |
 | `figure_3.yaml` | Figure 3 — decoding temperature | index 0 | 225 | **225 (100%)** |
 | `figure_4.yaml` | Figure 4 — fine-tuning | index 6 | 12 | 0 |
 
-2433 of 2469 runs (98.5%) can be re-scored from what ships in `results/`.
+2505 of 2517 runs (99.5%) can be re-scored from what ships in `results/`.
 
-### The two gaps
-
-**Table 5 — 24 missing cells.** The released Meditron-70B prompt-engineering
-results are filed under the name `Llama3-meditron-70b`, which is a different
-checkpoint from the `epfl-llm/meditron-70b` used elsewhere in the paper. Its
-HuggingFace id is not recorded in the repository or the paper, so the config
-cannot name it and `--check` reports its cells as missing. The result files
-themselves are present under that name; confirm the checkpoint before re-running.
+### The remaining gap
 
 **Figure 4 — 12 missing cells.** Fine-tuning is done with LLaMA-Factory, which
 is not vendored here, and the trained adapters are not released. See
 [`fine_tuning.md`](fine_tuning.md). Each run needs its own `--lora_path`, so use
 this config as a checklist rather than with `--run`.
+
+### A naming quirk worth knowing
+
+Meditron-70B's prompt-engineering results (Table 5, `random_index 6`) were
+written under the filename `Llama3-meditron-70b` rather than the `meditron-70b`
+its checkpoint id implies. Scoring those files reproduces the published
+Meditron-70B row exactly on all six columns, so `configs/models.yaml` carries a
+`result_aliases` entry pointing at them and the released files are left as they
+are. Any model can carry such an alias if its runs were saved under a different
+directory name.
 
 ## Individual runs
 
