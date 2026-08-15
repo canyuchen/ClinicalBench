@@ -1,20 +1,31 @@
 # Figure 4 -- fine-tuned LLMs.
 #
-# Fine-tuning itself is done with LLaMA-Factory, which is not vendored here; see
-# docs/fine_tuning.md for the training-set export and the adapter configuration.
+# Four general-purpose checkpoints are fine-tuned and compared against the
+# traditional baselines on both databases. Fine-tuning itself is done with
+# LLaMA-Factory, which is not vendored here; see docs/fine_tuning.md for the
+# training-set export and the adapter configuration.
+#
 # This config covers the evaluation half only: merge the adapter and score it on
 # the same 500-sample cohort the prompt-engineering experiments use, so the two
 # are directly comparable.
 #
-# Each run needs its own --lora_path, so use this config with --check or as a
-# checklist rather than with --run.
+# Two caveats:
+#   * Each run needs its own --lora_path, so use this with --check or as a
+#     checklist rather than with --run.
+#   * The paper reports two variants, LoRA (Full) and LoRA (Last Layer), but the
+#     result filename carries a single `_LORA` suffix and cannot tell them
+#     apart. Give each variant its own --result_root.
+#
+# The traditional-baseline reference lines in the figure are the index-6 ORI runs
+# already covered by table_5.yaml -- a baseline has no LoRA variant -- so only
+# the fine-tuned checkpoints are listed here.
 
 produces: "Figure 4 -- fine-tuning"
-datasets: [mimic3]
+datasets: [mimic3, mimic4]
 tasks: [length_pred, mortality_pred, readmission_pred]
 random_indices: [6]
 mode: LORA
 scoring: logits
 requires_lora_path: true
-models: [prompt_llms]
+models: [finetune_llms]
 metrics: [f1]

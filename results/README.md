@@ -43,7 +43,7 @@ scored positionally against the test split rather than by patient id.
 
 ## Coverage
 
-2,505 of the 2,517 runs the paper's configs stand for (99.5%). Per config:
+2,505 of the 2,529 runs the paper's configs stand for (99.1%). Per config:
 
 ```shell
 python -m clinicalbench.experiments configs/paper/table_1.yaml --check
@@ -61,9 +61,10 @@ table, and the roster in `configs/models.yaml` does not reference them.
 `Llama-2-70b-chat-hf`, `Llama3-OpenBioLLM-8B`, `MedLLaMA_13B`, `medalpaca-7b`,
 `vicuna-13b-v1.5`
 
-`Llama3-meditron-70b` is not in that list: it holds Meditron-70B's Table 5
-results under a filename that differs from its checkpoint id, and
-`configs/models.yaml` maps it back with a `result_aliases` entry.
+Meditron-70B's `random_index 6` files were originally named
+`Llama3-meditron-70b`, which did not match its checkpoint id. They have been
+renamed to `meditron-70b`; the contents are unchanged and still reproduce the
+published Table 5 row exactly.
 
 Four stray `*_withprob.csv` files use a naming convention no current script
 produces; they predate the `--scoring logits` flag.

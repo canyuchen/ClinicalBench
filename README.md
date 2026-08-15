@@ -54,7 +54,7 @@ in this repository:
 ## What is here
 
 - **All 3,015 result files** behind the paper, so every number can be re-scored
-  without a GPU — 99.5% of the runs the paper's configs stand for.
+  without a GPU — 99.1% of the runs the paper's configs stand for.
 - **A config per table and figure**, expanding into the exact commands that
   produced it.
 - **The cohort index files**, so splits are identical to the published ones.
@@ -142,7 +142,7 @@ python -m clinicalbench.baselines.traditional \
 | `configs/paper/table_5.yaml` | Table 5 — prompt engineering | 144 | **100%** |
 | `configs/paper/table_6.yaml` | Tables 6–8 — training-set scaling | 1320 | **100%** |
 | `configs/paper/figure_3.yaml` | Figure 3 — decoding temperature | 225 | **100%** |
-| `configs/paper/figure_4.yaml` | Figure 4 — fine-tuning | 12 | 0% |
+| `configs/paper/figure_4.yaml` | Figure 4 — fine-tuning | 24 | 0% |
 
 Full commands, and the one remaining gap, in
 [docs/reproduction.md](docs/reproduction.md).

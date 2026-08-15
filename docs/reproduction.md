@@ -41,26 +41,27 @@ mimic3   mortality_pred    Meta-Llama-3-8B-...  ORI      5   25.81 (25.55, 26.06
 | `table_5.yaml` | Table 5 — prompt engineering | index 6 | 144 | **144 (100%)** |
 | `table_6.yaml` | Tables 6–8 — training-set scaling (appendix) | index 0–4 | 1320 | **1320 (100%)** |
 | `figure_3.yaml` | Figure 3 — decoding temperature | index 0 | 225 | **225 (100%)** |
-| `figure_4.yaml` | Figure 4 — fine-tuning | index 6 | 12 | 0 |
+| `figure_4.yaml` | Figure 4 — fine-tuning | index 6 | 24 | 0 |
 
-2505 of 2517 runs (99.5%) can be re-scored from what ships in `results/`.
+2505 of 2529 runs (99.1%) can be re-scored from what ships in `results/`.
 
 ### The remaining gap
 
-**Figure 4 — 12 missing cells.** Fine-tuning is done with LLaMA-Factory, which
-is not vendored here, and the trained adapters are not released. See
-[`fine_tuning.md`](fine_tuning.md). Each run needs its own `--lora_path`, so use
-this config as a checklist rather than with `--run`.
+**Figure 4 — all 24 cells.** Fine-tuning is done with LLaMA-Factory, which is
+not vendored here, and the trained adapters are not released. See
+[`fine_tuning.md`](fine_tuning.md), which does include the dataset export. Each
+run needs its own `--lora_path`, so use this config as a checklist rather than
+with `--run`.
 
-### A naming quirk worth knowing
+### A note on Meditron-70B's filenames
 
-Meditron-70B's prompt-engineering results (Table 5, `random_index 6`) were
-written under the filename `Llama3-meditron-70b` rather than the `meditron-70b`
-its checkpoint id implies. Scoring those files reproduces the published
-Meditron-70B row exactly on all six columns, so `configs/models.yaml` carries a
-`result_aliases` entry pointing at them and the released files are left as they
-are. Any model can carry such an alias if its runs were saved under a different
-directory name.
+Meditron-70B's `random_index 6` results — its Table 5 base row and its four
+prompt-engineering rows — were originally written under the filename
+`Llama3-meditron-70b`, which does not match its checkpoint id
+(`epfl-llm/meditron-70b`). Scoring them reproduces the published Meditron-70B
+row exactly on all six columns, which is what identified them; they have since
+been renamed to the canonical `meditron-70b`, so one model now has one name
+throughout. `tests/test_reproduction.py` pins those six numbers.
 
 ## Individual runs
 

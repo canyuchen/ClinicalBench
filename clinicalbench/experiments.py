@@ -19,7 +19,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterator, List, Optional, Tuple
+from typing import Dict, Iterator, List, Optional
 
 import yaml
 
@@ -42,32 +42,16 @@ class Run:
     scoring: str = "logits"
     temperature: Optional[float] = None
     ratio: Optional[float] = None
-    #: Other names this model's results were written under. Some runs were
-    #: saved under a checkpoint directory whose name differs from the id, so
-    #: the canonical filename does not exist even though the run does.
-    result_aliases: Tuple[str, ...] = ()
 
     @property
     def is_baseline(self) -> bool:
         return self.model_id is None
 
-    def _path_for(self, result_root: Path, name: str) -> Path:
+    def result_file(self, result_root: Path) -> Path:
         return result_path(
-            result_root, self.task, self.dataset, name,
+            result_root, self.task, self.dataset, self.model_name,
             self.random_index, self.mode, self.temperature, self.ratio,
         )
-
-    def result_file(self, result_root: Path) -> Path:
-        """Where a new run writes."""
-        return self._path_for(result_root, self.model_name)
-
-    def existing_result_file(self, result_root: Path) -> Optional[Path]:
-        """Where this run's result already is, canonical name or alias."""
-        for name in (self.model_name, *self.result_aliases):
-            path = self._path_for(result_root, name)
-            if path.exists():
-                return path
-        return None
 
     def command(self, data_root: Path, result_root: Path) -> List[str]:
         if self.is_baseline:
@@ -103,17 +87,7 @@ def load_roster(path: Path = MODELS_FILE) -> Dict[str, List[Dict]]:
         for name in names:
             if name not in catalogue:
                 raise KeyError(f"group {group!r} references unknown model {name!r}")
-            entry = catalogue[name]
-            # a catalogue value is either the bare id (or null for a baseline)
-            # or a mapping carrying extra fields such as result_aliases
-            if isinstance(entry, dict):
-                entries.append({
-                    "name": name,
-                    "id": entry.get("id"),
-                    "result_aliases": tuple(entry.get("result_aliases", ())),
-                })
-            else:
-                entries.append({"name": name, "id": entry, "result_aliases": ()})
+            entries.append({"name": name, "id": catalogue[name]})
         roster[group] = entries
     return roster
 
@@ -154,13 +128,12 @@ def expand(config: Dict, roster: Dict[str, List[Dict]]) -> Iterator[Run]:
             task=task, dataset=dataset, random_index=index, mode=mode,
             scoring=scoring_by_mode.get(mode, default_scoring),
             temperature=temp, ratio=ratio,
-            result_aliases=model.get("result_aliases", ()),
         )
 
 
 def check(runs: List[Run], result_root: Path) -> int:
     """Report which cells already have a result file."""
-    missing = [r for r in runs if r.existing_result_file(result_root) is None]
+    missing = [r for r in runs if not r.result_file(result_root).exists()]
     present = len(runs) - len(missing)
     print(f"{present}/{len(runs)} cells have a result file under {result_root}/")
     if missing:
@@ -196,7 +169,7 @@ def main() -> None:
         raise SystemExit(1 if check(runs, args.result_root) else 0)
 
     for run in runs:
-        if args.skip_existing and run.existing_result_file(args.result_root):
+        if args.skip_existing and run.result_file(args.result_root).exists():
             continue
         cmd = run.command(args.data_root, args.result_root)
         if args.run:

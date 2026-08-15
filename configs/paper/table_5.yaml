@@ -14,10 +14,9 @@ random_indices: [6]
 # its + ICL / + CoT / + RP / + SR rows, so ORI belongs here too.
 modes: [ORI, ICL, COT, RP, SR]
 scoring_by_mode: { ORI: logits, ICL: logits, RP: logits, COT: generate, SR: generate }
-# NOTE: the released Meditron-70B prompt-engineering results are filed under
-# the name `Llama3-meditron-70b`, a different checkpoint from
-# `epfl-llm/meditron-70b` used elsewhere. Its HuggingFace id is not recorded
-# anywhere in the repo or the paper, so `--check` reports its 24 cells as
-# missing. Confirm the checkpoint before re-running this table.
+# NOTE: Meditron-70B's index-6 files were originally named
+# `Llama3-meditron-70b`, which did not match its checkpoint id. They reproduce
+# the published Meditron-70B row exactly and have been renamed to the canonical
+# `meditron-70b`; see docs/reproduction.md.
 models: [prompt_traditional, prompt_llms]
 metrics: [f1]

@@ -8,7 +8,7 @@ vendored here; this page covers the parts that are.
 > configuration, so this figure could not be reproduced from it. The export is
 > now included (below) and the training settings are transcribed from the paper.
 > The trained adapters are still not released, so `--check` on
-> `configs/paper/figure_4.yaml` reports all 12 cells as missing.
+> `configs/paper/figure_4.yaml` reports all 24 cells as missing.
 
 ## 1. Export the dataset
 
@@ -109,10 +109,14 @@ python -m clinicalbench.eval.metrics \
     --task length_pred --dataset mimic3 --random_index 6 --mode LORA --auroc
 ```
 
-## Known gap
+## Which models
 
-The set of models in Figure 4 is drawn in the figure itself rather than listed
-in the paper's text, and only Gemma2-9B is named in the surrounding discussion.
-`configs/paper/figure_4.yaml` therefore uses the Table 5 roster as a placeholder;
-adjust it to match the figure before treating its `--check` output as
-authoritative.
+Figure 4 fine-tunes four general-purpose checkpoints — **Llama3-8B, Gemma2-9B,
+Vicuna-v1.5-7B and Mistral-v0.3-7B** — on both databases and all three tasks,
+which is the `finetune_llms` group in `configs/models.yaml`. The traditional
+reference lines in the figure are the index-6 baseline runs already covered by
+`configs/paper/table_5.yaml`.
+
+One limitation to plan around: the result filename carries a single `_LORA`
+suffix, so it cannot distinguish LoRA (Full) from LoRA (Last Layer). Give each
+variant its own `--result_root`.
