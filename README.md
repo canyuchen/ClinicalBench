@@ -1,7 +1,7 @@
 # ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction? (KDD 2026)
 
 - **TLDR** : We discover that both general-purpose and medical LLMs, even with different model scales, diverse prompting or fine-tuning strategies, <b>still cannot beat traditional ML models in clinical prediction yet</b>, shedding light on their <b><i>potential deficiency in clinical reasoning and decision-making</i></b>.
-- **Authors** : <a href="https://canyuchen.com">Canyu Chen</a>\*, Jian Yu\*,  <a href="https://shanchen.dev/">Shan Chen</a>, <a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&hl=zh-CN&user=HED_458AAAAJ&sortby=pubdate">Che Liu</a>, <a href="https://scholar.google.com/citations?hl=zh-CN&user=EVj1cNoAAAAJ&view_op=list_works">Zhongwei Wan</a>, <a href="https://www.bittermanlab.org/">Danielle S. Bitterman</a>, <a href="https://wcm-wanglab.github.io/">Fei Wang</a>, <a href="https://www.cs.emory.edu/~kshu5/">Kai Shu</a> (*equal contributions)
+- **Authors** : <a href="https://canyuchen.com">Canyu Chen</a>\*, <a href="https://openreview.net/profile?id=~Jian_Yu4">Jian Yu</a>\*, <a href="https://shanchen.dev/">Shan Chen</a>, <a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&user=HED_458AAAAJ&sortby=pubdate">Che Liu</a>, <a href="https://scholar.google.com/citations?hl=zh-CN&user=EVj1cNoAAAAJ&view_op=list_works">Zhongwei Wan</a>, <a href="https://scholar.google.com/citations?hl=en&user=yR_ZhV0AAAAJ">Shuang Zhou</a>, <a href="https://www.feinberg.northwestern.edu/faculty-profiles/az/profile.html?xid=33821">Yuan Luo</a>, <a href="https://med.umn.edu/bio/rui-zhang">Rui Zhang</a>, <a href="https://www.bittermanlab.org/">Danielle S. Bitterman</a>, <a href="https://wcm-wanglab.github.io/">Fei Wang</a>, <a href="https://www.cs.emory.edu/~kshu5/">Kai Shu</a>† (\*equal contributions, †corresponding author)
 - **Paper** : [Read our paper](https://arxiv.org/abs/2411.06469)
 - **Project Website**: [https://clinicalbench.github.io](https://clinicalbench.github.io)
 
@@ -206,11 +206,14 @@ This source code is released under the MIT license. We do not own any of the dat
 ## Citation
 If you find our paper or code useful, we will greatly appreacite it if you could consider citing our paper:
 ```
-@article{chen2024clinicalbench,
-      title   = {ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?},
-      author  = {Canyu Chen and Jian Yu and Shan Chen and Che Liu and Zhongwei Wan and Danielle Bitterman and Fei Wang and Kai Shu},
-      year    = {2024},
-      journal = {arXiv preprint arXiv: 2411.06469}
-    }
+@inproceedings{chen2026clinicalbench,
+  title     = {ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?},
+  author    = {Chen, Canyu and Yu, Jian and Chen, Shan and Liu, Che and Wan, Zhongwei
+               and Zhou, Shuang and Luo, Yuan and Zhang, Rui and Bitterman, Danielle S.
+               and Wang, Fei and Shu, Kai},
+  booktitle = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery
+               and Data Mining (KDD '26)},
+  year      = {2026}
+}
 ```
 
