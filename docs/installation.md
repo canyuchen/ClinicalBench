@@ -26,7 +26,7 @@ PyHealth readers require.
 pytest tests/ -q
 ```
 
-101 tests, no GPU and no MIMIC access needed. They check that the cohort spec
+104 tests, no GPU and no MIMIC access needed. They check that the cohort spec
 still matches the shipped index files, that the prompt builder reproduces the
 released prompts byte-for-byte, and that the evaluator still reproduces the
 paper's Table 1 numbers from the released result files.

@@ -1,13 +1,13 @@
-#!/usr/bin/env python
 """Aggregate the released result files into a paper table.
 
 Scores every cell a config stands for and prints mean (95% CI) across the
-cohort reshuffles, which is the form the paper's tables use.
+cohort reshuffles, which is the form the paper's tables use. Run from the
+repository root so the default ``configs/`` and ``results/`` paths resolve.
 
 ::
 
-    python scripts/score_table.py configs/paper/table_1.yaml
-    python scripts/score_table.py configs/paper/table_1.yaml --task mortality_pred --csv
+    python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml
+    python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --csv
 """
 
 from __future__ import annotations
@@ -15,16 +15,13 @@ from __future__ import annotations
 import argparse
 import math
 import statistics
-import sys
 from collections import defaultdict
 from pathlib import Path
 
 import yaml
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from clinicalbench.eval.metrics import score_file  # noqa: E402
-from clinicalbench.experiments import expand, load_roster  # noqa: E402
+from clinicalbench.eval.metrics import score_file
+from clinicalbench.experiments import expand, load_roster
 
 T_95 = {2: 12.71, 3: 4.303, 4: 3.182, 5: 2.776}
 

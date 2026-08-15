@@ -4,7 +4,7 @@
 They are here so the numbers can be re-scored without re-running inference:
 
 ```shell
-python scripts/score_table.py configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
+python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
 ```
 
 ## Layout

@@ -65,6 +65,7 @@ clinicalbench-make-splits = "clinicalbench.data.make_splits:main"
 clinicalbench-llm = "clinicalbench.inference.llm:main"
 clinicalbench-baselines = "clinicalbench.baselines.traditional:main"
 clinicalbench-score = "clinicalbench.eval.metrics:main"
+clinicalbench-table = "clinicalbench.eval.aggregate:main"
 
 [tool.setuptools.packages.find]
 include = ["clinicalbench*"]

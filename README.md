@@ -30,7 +30,7 @@
 
 - **2026-08** — `v1.0`: repository restructured into an installable
   `clinicalbench` package. One config per paper table/figure, 99.1% of the
-  paper's runs re-scorable from the shipped results without a GPU, 101
+  paper's runs re-scorable from the shipped results without a GPU, 104
   regression tests, and the reproducibility fixes listed in
   [docs/reproduction.md](docs/reproduction.md).
 - **2026** — ClinicalBench is accepted at **KDD 2026**.
@@ -85,15 +85,15 @@ clinicalbench/
 │   └── templates/icl/     few-shot exemplars, one file per task x database
 ├── inference/             LLM runner and the prompt-engineering modes
 ├── baselines/             the 11 traditional ML models and their features
-├── eval/                  scoring
+├── eval/                  scoring one result file; aggregating a whole table
 └── _vendor/pyhealth/      reduced PyHealth, for reading MIMIC (see NOTICE)
 
 configs/paper/             one config per table and figure
 data/{task}/{dataset}/     cohort index files (.npy)
 results/{task}/{dataset}/  released model outputs
 docs/                      installation, data prep, reproduction, methodology
-scripts/                   data preparation and table aggregation
-tests/                     101 tests, no GPU or MIMIC access required
+scripts/                   data-preparation shell entry point
+tests/                     104 tests, no GPU or MIMIC access required
 ```
 
 ## Install
@@ -111,7 +111,7 @@ Details in [docs/installation.md](docs/installation.md).
 **Re-score the paper without touching a GPU:**
 
 ```shell
-python scripts/score_table.py configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
+python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
 ```
 
 **See what a table costs and what is already done:**

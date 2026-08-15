@@ -20,7 +20,7 @@ python -m clinicalbench.experiments configs/paper/table_1.yaml --run --skip-exis
 And to turn released results back into the published table:
 
 ```shell
-python scripts/score_table.py configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
+python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
 ```
 
 ```
