@@ -1,0 +1,88 @@
+# Model catalogue and the roster each paper table uses.
+#
+# `catalogue` maps the short name used in the paper to its HuggingFace
+# checkpoint; `null` marks a traditional baseline, which is run by
+# clinicalbench.baselines.traditional rather than by a checkpoint id.
+#
+# Result files are keyed by the last path segment of the id (or the baseline
+# name), which is what clinicalbench.naming produces.
+
+catalogue:
+  # ---- general-purpose LLMs (14 benchmarked in total) ----
+  Llama3-8B:         meta-llama/Meta-Llama-3-8B-Instruct
+  Llama3-70B:        meta-llama/Meta-Llama-3-70B-Instruct
+  Mistral-v0.3-7B:   mistralai/Mistral-7B-Instruct-v0.3
+  Gemma2-9B:         google/gemma-2-9b-it
+  Qwen2-0.5B:        Qwen/Qwen2-0.5B-Instruct
+  Qwen2-1.5B:        Qwen/Qwen2-1.5B-Instruct
+  Qwen2-7B:          Qwen/Qwen2-7B-Instruct
+  Yi-v1.5-6B:        01-ai/Yi-1.5-6B-Chat
+  Yi-v1.5-9B:        01-ai/Yi-1.5-9B-Chat
+  Yi-v1.5-34B:       01-ai/Yi-1.5-34B-Chat
+  Vicuna-v1.5-7B:    lmsys/vicuna-7b-v1.5
+  Phi3.5-mini-3.8B:  microsoft/Phi-3.5-mini-instruct
+  InternLM2.5-7B:    internlm/internlm2_5-7b-chat
+  MiniCPM3-4B:       openbmb/MiniCPM3-4B
+
+  # ---- medical LLMs (8 benchmarked in total) ----
+  Meditron-7B:   epfl-llm/meditron-7b
+  Meditron-70B:  epfl-llm/meditron-70b
+  Medllama3-8B:  ProbeMedicalYonseiMAILab/medllama3-v20
+  BioMistral-7B: BioMistral/BioMistral-7B
+  Med42-8B:      m42-health/Llama3-Med42-8B
+  Med42-70B:     m42-health/Llama3-Med42-70B
+  BioMedGPT-7B:  PharMolix/BioMedGPT-LM-7B
+  Internist-7B:  internistai/base-7b-v0.2
+
+  # ---- traditional ML baselines ----
+  XGBoost:            null
+  LogisticRegression: null
+  DecisionTree:       null
+  RandomForest:       null
+  AdaBoost:           null
+  SVM:                null
+  NaiveBayes:         null
+  KNN:                null
+  NeuralNetwork:      null
+  Transformer:        null
+  RNN:                null
+
+groups:
+  # Tables 1 and 2 (MIMIC-III and MIMIC-IV main results).
+  # LogisticRegression and NeuralNetwork are implemented and can be run, but the
+  # paper's main tables do not report them.
+  main_traditional:
+    [XGBoost, DecisionTree, RandomForest, AdaBoost, SVM, NaiveBayes, KNN,
+     Transformer, RNN]
+  main_general:
+    [Llama3-8B, Mistral-v0.3-7B, Gemma2-9B, Qwen2-7B, Yi-v1.5-9B,
+     Vicuna-v1.5-7B, Phi3.5-mini-3.8B, InternLM2.5-7B, MiniCPM3-4B]
+  main_medical:
+    [Meditron-7B, Medllama3-8B, BioMistral-7B, Med42-8B, BioMedGPT-7B,
+     Internist-7B]
+
+  # Table 4: does scaling the LLM up close the gap? Paired small/large models.
+  scale_traditional: [XGBoost, SVM, Transformer, RNN]
+  scale_llms:
+    [Llama3-8B, Llama3-70B, Qwen2-0.5B, Qwen2-1.5B, Qwen2-7B,
+     Yi-v1.5-6B, Yi-v1.5-9B, Yi-v1.5-34B,
+     Meditron-7B, Meditron-70B, Med42-8B, Med42-70B]
+
+  # Table 5 and Figure 4: prompt engineering and fine-tuning are expensive, so
+  # they run on a smaller roster.
+  prompt_traditional: [XGBoost, SVM, Transformer, RNN]
+  prompt_llms: [Llama3-8B, Llama3-70B, Meditron-7B, Meditron-70B]
+
+  # Table 6: training-set scaling sweeps every baseline.
+  all_traditional:
+    [XGBoost, LogisticRegression, DecisionTree, RandomForest, AdaBoost, SVM,
+     NaiveBayes, KNN, NeuralNetwork, Transformer, RNN]
+
+  # The full roster from the paper's reproducibility statement.
+  all_general:
+    [Llama3-8B, Llama3-70B, Mistral-v0.3-7B, Gemma2-9B, Qwen2-0.5B, Qwen2-1.5B,
+     Qwen2-7B, Yi-v1.5-6B, Yi-v1.5-9B, Yi-v1.5-34B, Vicuna-v1.5-7B,
+     Phi3.5-mini-3.8B, InternLM2.5-7B, MiniCPM3-4B]
+  all_medical:
+    [Meditron-7B, Meditron-70B, Medllama3-8B, BioMistral-7B, Med42-8B,
+     Med42-70B, BioMedGPT-7B, Internist-7B]

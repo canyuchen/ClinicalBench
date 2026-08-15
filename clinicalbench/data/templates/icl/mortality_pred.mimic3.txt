@@ -1,0 +1,20 @@
+Patient information:
+Age: 43
+Gender: female
+Conditions: Coronary atherosclerosis of native coronary artery, Intermediate coronary syndrome, Diabetes mellitus without mention of complication, type I [juvenile type], not stated as uncontrolled, Unspecified essential hypertension, Pure hypercholesterolemia, Tobacco use disorder
+Procedures: (Aorto)coronary bypass of two coronary arteries, Left heart cardiac catheterization, Extracorporeal circulation auxiliary to open heart surgery, Coronary arteriography using two catheters, Angiocardiography of left heart structures
+Using Drugs: other analgesics and antipyretics, antipsychotics, vasodilators used in cardiac diseases, antacids, urologicals, anxiolytics, antidepressants, potassium, iron preparations, lipid modifying agents, plain, beta blocking agents, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), dopaminergic agents, thyroid preparations, opioids, other nutrients, cardiac stimulants excl. cardiac glycosides, drugs for constipation, i.v. solution additives, calcium, propulsives, antiinflammatory and antirheumatic products, non-steroids, other antibacterials, high-ceiling diuretics, antithrombotic agents, other beta-lactam antibacterials, other mineral supplements
+Will the patient die because of the above situation?
+Answer 1 if yes, 0 if no. Answer with only the number.
+Answer: 0
+
+Patient information:
+Age: 86
+Gender: male
+Conditions: Intracerebral hemorrhage, Pneumonitis due to inhalation of food or vomitus, Unspecified essential hypertension, Aortocoronary bypass status, Coronary atherosclerosis of unspecified type of vessel, native or graft
+Procedures: Continuous invasive mechanical ventilation for less than 96 consecutive hours
+Using Drugs: beta blocking agents, vitamin b1, plain and in combination with vitamin b6 and b12, i.v. solution additives, antiepileptics, quinolone antibacterials, other antibacterials, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), other mineral supplements, other diagnostic agents, anxiolytics, anesthetics, general, opioids, antiemetics and antinauseants, hypnotics and sedatives
+Will the patient die because of the above situation?
+Answer 1 if yes, 0 if no. Answer with only the number.
+Answer: 1
+

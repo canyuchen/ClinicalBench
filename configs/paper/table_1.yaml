@@ -1,0 +1,15 @@
+# Table 1 -- LLMs vs traditional ML on MIMIC-III, all three tasks.
+#
+# Five reshuffles of the cohort (random_index 0-4); the table reports the mean
+# and a 95% CI over them. Both F1 and AUROC are reported, so the LLM runs need
+# `--scoring logits` to record the PROB column.
+
+produces: "Table 1 -- main results on MIMIC-III"
+datasets: [mimic3]
+tasks: [length_pred, mortality_pred, readmission_pred]
+random_indices: [0, 1, 2, 3, 4]
+mode: ORI
+scoring: logits
+models: [main_traditional, main_general, main_medical]
+metrics: [f1, auroc]
+aggregate: mean_ci95

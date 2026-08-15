@@ -1,0 +1,36 @@
+Patient information:
+Age: 39
+Gender: female
+Conditions: Endometriosis of ovary, Endometriosis of pelvic peritoneum, Leiomyoma of uterus, unspecified, Other specified diseases of blood and blood-forming organs
+Procedures: Other unilateral salpingo-oophorectomy, Other local excision or destruction of ovary, Other cystoscopy
+Using Drugs: antidepressants, opioids, antacids, calcium, other analgesics and antipyretics, throat preparations, antiinflammatory and antirheumatic products, non-steroids, antiemetics and antinauseants, viral vaccines, antiinfectives and antiseptics, excl. combinations with corticosteroids
+Predict the number of weeks of stay in hospital.
+Answer 1 if no more than one week,
+Answer 2 if more than one week but not more than two weeks,
+Answer 3 if more than two weeks.
+Answer with only the number. Answer: 1
+
+Patient information:
+Age: 38
+Gender: male
+Conditions: Other displaced fracture of fourth cervical vertebra, initial encounter for closed fracture, Respiratory failure, unspecified, unspecified whether with hypoxia or hypercapnia, Contusion of lung, unilateral, initial encounter, Unspecified injury at unspecified level of cervical spinal cord, initial encounter, Unspecified fracture of sternum, initial encounter for closed fracture, Alcohol abuse with intoxication delirium, Enterocolitis due to Clostridium difficile, not specified as recurrent, Cerebrospinal fluid leak, Wedge compression fracture of second thoracic vertebra, initial encounter for closed fracture, Other displaced fracture of fifth cervical vertebra, initial encounter for closed fracture, Other displaced fracture of sixth cervical vertebra, initial encounter for closed fracture, Other displaced fracture of seventh cervical vertebra, initial encounter for closed fracture, Sprain of unspecified ligament of unspecified ankle, initial encounter, Fall (on) (from) unspecified stairs and steps, initial encounter, Other specified places as the place of occurrence of the external cause, Laceration without foreign body of scalp, initial encounter, Nicotine dependence, cigarettes, uncomplicated, Cannabis use, unspecified, uncomplicated, Anemia, unspecified, Other specified dorsopathies, cervical region
+Procedures: Fusion of 2 or more Cervical Vertebral Joints with Autologous Tissue Substitute, Anterior Approach, Anterior Column, Open Approach, Insertion of Endotracheal Airway into Trachea, Via Natural or Artificial Opening, Release Cervical Spinal Cord, Open Approach, Excision of Cervical Vertebra, Open Approach, Fusion of Cervicothoracic Vertebral Joint with Autologous Tissue Substitute, Posterior Approach, Anterior Column, Open Approach, Reposition Cervical Vertebral Joint, Open Approach, Repair Spinal Meninges, Open Approach, Respiratory Ventilation, 24-96 Consecutive Hours, Introduction of Nutritional Substance into Lower GI, Via Natural or Artificial Opening
+Using Drugs: other nutrients, insulins and analogues, anxiolytics, opioids, glycogenolytic hormones, other analgesics and antipyretics, agents for treatment of hemorrhoids and anal fissures for topical use, antipruritics, incl. antihistamines, anesthetics, etc., i.v. solution additives, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), other mineral supplements, other diagnostic agents, antiinfectives and antiseptics, excl. combinations with corticosteroids, viral vaccines, antithrombotic agents, vitamin b12 and folic acid, vitamin b1, plain and in combination with vitamin b6 and b12, antiemetics and antinauseants, other beta-lactam antibacterials, antiepileptics, drugs for constipation, i.v. solutions, antivaricose therapy, anesthetics, general, corticosteroids for systemic use, plain, stomatological preparations, throat preparations, blood and related products, drugs used in addictive disorders, digestives, incl. enzymes, antiobesity preparations, excl. diet products, urologicals, thyroid preparations, antifungals for topical use, other dermatological preparations, other antidiarrheals, antiadrenergic agents, centrally acting, low-ceiling diuretics, thiazides, antihypertensives and diuretics in combination, beta-lactam antibacterials, penicillins, vitamin a and d, incl. combinations of the two, calcium, antihistamines for systemic use, iron preparations, antiinfectives, potassium, lipid modifying agents, plain, other ophthalmologicals, other systemic drugs for obstructive airway diseases, all other therapeutic products, antidiarrheal microorganisms, capillary stabilizing agents, antipsoriatics for systemic use, corticosteroids, plain, corticosteroids, other combinations, other respiratory system products, anesthetics, local, hypnotics and sedatives, medicated dressings, cardiac glycosides, antimigraine preparations, vasodilators used in cardiac diseases, intestinal adsorbents, gonadotropins and other ovulation stimulants, belladonna and derivatives, plain, antispasmodics in combination with psycholeptics, irrigating solutions, low-ceiling diuretics, excl. thiazides, high-ceiling diuretics, antiseptics and disinfectants, other antibacterials, antipsychotics, adrenergics, inhalants, agents against amoebiasis and other protozoal diseases
+Predict the number of weeks of stay in hospital.
+Answer 1 if no more than one week,
+Answer 2 if more than one week but not more than two weeks,
+Answer 3 if more than two weeks.
+Answer with only the number. Answer: 2
+
+Patient information:
+Age: 57
+Gender: male
+Conditions: Acute myeloblastic leukemia, not having achieved remission, Organ-limited amyloidosis, Agranulocytosis secondary to cancer chemotherapy, Oral mucositis (ulcerative), unspecified, Other disorders of skin and subcutaneous tissue in diseases classified elsewhere, Gastro-esophageal reflux disease without esophagitis, Pleurodynia, Dizziness and giddiness, Dysuria, Diarrhea, unspecified, Adverse effect of antineoplastic and immunosuppressive drugs, initial encounter, Fever presenting with conditions classified elsewhere, Unspecified place in hospital as the place of occurrence of the external cause
+Procedures: Extraction of Iliac Bone Marrow, Percutaneous Approach, Diagnostic, Introduction of Other Antineoplastic into Central Vein, Percutaneous Approach, Excision of Left Lower Leg Skin, External Approach, Diagnostic
+Using Drugs: i.v. solution additives, drugs for constipation, antigout preparations, other analgesics and antipyretics, other antineoplastic agents, antiarrhythmics, class i and iii, antithrombotic agents, potassium, other mineral supplements, other diagnostic agents, i.v. solutions, quinolone antibacterials, direct acting antivirals, antiemetics and antinauseants, corticosteroids for systemic use, plain, cytotoxic antibiotics and related substances, antimetabolites, anxiolytics, antacids, calcium, urologicals, antivaricose therapy, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), antimycotics for systemic use, opioids, other beta-lactam antibacterials, other antibacterials, agents for treatment of hemorrhoids and anal fissures for topical use, antipruritics, incl. antihistamines, anesthetics, etc.
+Predict the number of weeks of stay in hospital.
+Answer 1 if no more than one week,
+Answer 2 if more than one week but not more than two weeks,
+Answer 3 if more than two weeks.
+Answer with only the number. Answer: 3
+

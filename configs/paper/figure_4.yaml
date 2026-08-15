@@ -1,0 +1,20 @@
+# Figure 4 -- fine-tuned LLMs.
+#
+# Fine-tuning itself is done with LLaMA-Factory, which is not vendored here; see
+# docs/fine_tuning.md for the training-set export and the adapter configuration.
+# This config covers the evaluation half only: merge the adapter and score it on
+# the same 500-sample cohort the prompt-engineering experiments use, so the two
+# are directly comparable.
+#
+# Each run needs its own --lora_path, so use this config with --check or as a
+# checklist rather than with --run.
+
+produces: "Figure 4 -- fine-tuning"
+datasets: [mimic3]
+tasks: [length_pred, mortality_pred, readmission_pred]
+random_indices: [6]
+mode: LORA
+scoring: logits
+requires_lora_path: true
+models: [prompt_llms]
+metrics: [f1]

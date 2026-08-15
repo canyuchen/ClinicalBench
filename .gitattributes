@@ -1,0 +1,5 @@
+# Result CSVs and cohort indices are data, not code: keep diffs out of the way
+# and never let line-ending conversion touch them.
+*.csv   -diff -text
+*.npy   -diff -text binary
+*.png   -diff binary

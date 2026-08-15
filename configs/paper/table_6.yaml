@@ -1,0 +1,14 @@
+# Tables 6-8 (appendix) -- traditional ML trained on fractions of the training
+# set, showing the baselines still win when starved of data.
+#
+# The fractions are nested rather than independent draws: the subsample keeps
+# the first `ratio` share of each label in file order. See docs/methodology.md.
+
+produces: "Tables 6-8 -- traditional ML on reduced training sets"
+datasets: [mimic3, mimic4]
+tasks: [length_pred, mortality_pred, readmission_pred]
+random_indices: [0, 1, 2, 3, 4]
+ratios: [0.05, 0.1, 0.2, 0.4]
+models: [all_traditional]
+metrics: [f1, auroc]
+aggregate: mean_ci95

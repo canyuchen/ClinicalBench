@@ -1,0 +1,14 @@
+# Table 4 -- does making the LLM bigger close the gap?
+#
+# Paired small/large checkpoints from the same family (Qwen2 0.5B/1.5B/7B,
+# Yi 6B/9B/34B, Llama3 8B/70B, Meditron 7B/70B, Med42 8B/70B) against four
+# baselines, on both databases.
+
+produces: "Table 4 -- LLM scale vs traditional ML"
+datasets: [mimic3, mimic4]
+tasks: [length_pred, mortality_pred, readmission_pred]
+random_indices: [0]
+mode: ORI
+scoring: logits
+models: [scale_traditional, scale_llms]
+metrics: [f1, auroc]

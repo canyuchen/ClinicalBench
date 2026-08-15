@@ -1,0 +1,20 @@
+Patient information:
+Age: 37
+Gender: female
+Conditions: Post-term pregnancy, Other maternal infectious and parasitic diseases complicating pregnancy, third trimester, 41 weeks gestation of pregnancy, Single live birth, Streptococcus, group B, as the cause of diseases classified elsewhere, Second degree perineal laceration during delivery
+Procedures: Introduction of Other Therapeutic Substance into Female Reproductive, Via Natural or Artificial Opening, Delivery of Products of Conception, External Approach, Repair Perineum Muscle, Open Approach
+Using Drugs: antacids, urologicals, throat preparations, antiinflammatory and antirheumatic products, non-steroids, agents for treatment of hemorrhoids and anal fissures for topical use, antipruritics, incl. antihistamines, anesthetics, etc., opioids, drugs for constipation, bacterial and viral vaccines, combined, calcium, viral vaccines
+Will the patient die because of the above situation?
+Answer 1 if yes, 0 if no. Answer with only the number.
+Answer: 0
+
+Patient information:
+Age: 52
+Gender: male
+Conditions: Hepatic encephalopathy, Defibrination syndrome, Subendocardial infarction, initial episode of care, Esophageal varices in diseases classified elsewhere, with bleeding, Acute kidney failure with lesion of tubular necrosis, Other ascites, Alcoholic cirrhosis of liver, Acute alcoholic intoxication in alcoholism, continuous, Acute alcoholic hepatitis, Other specified disorders of circulatory system
+Procedures: Percutaneous abdominal drainage, Intra-abdominal venous shunt, Venous catheterization, not elsewhere classified
+Using Drugs: i.v. solution additives, hypothalamic hormones, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), other nutrients, posterior pituitary lobe hormones, anesthetics, general, insulins and analogues, cardiac stimulants excl. cardiac glycosides, other beta-lactam antibacterials, blood and related products, vitamin k and other hemostatics, other mineral supplements, other diagnostic agents, antiinfectives and antiseptics, excl. combinations with corticosteroids, vitamin b12 and folic acid, vitamin b1, plain and in combination with vitamin b6 and b12, hypnotics and sedatives
+Will the patient die because of the above situation?
+Answer 1 if yes, 0 if no. Answer with only the number.
+Answer: 1
+

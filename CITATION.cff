@@ -1,0 +1,59 @@
+cff-version: 1.2.0
+message: "If you use ClinicalBench, please cite the paper below."
+title: "ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?"
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/canyuchen/ClinicalBench"
+url: "https://clinicalbench.github.io"
+type: software
+authors:
+  - family-names: Chen
+    given-names: Canyu
+  - family-names: Yu
+    given-names: Jian
+  - family-names: Chen
+    given-names: Shan
+  - family-names: Liu
+    given-names: Che
+  - family-names: Wan
+    given-names: Zhongwei
+  - family-names: Zhou
+    given-names: Shuang
+  - family-names: Luo
+    given-names: Yuan
+  - family-names: Zhang
+    given-names: Rui
+  - family-names: Bitterman
+    given-names: Danielle S.
+  - family-names: Wang
+    given-names: Fei
+  - family-names: Shu
+    given-names: Kai
+preferred-citation:
+  type: conference-paper
+  title: "ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?"
+  year: 2026
+  collection-title: "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '26)"
+  authors:
+    - family-names: Chen
+      given-names: Canyu
+    - family-names: Yu
+      given-names: Jian
+    - family-names: Chen
+      given-names: Shan
+    - family-names: Liu
+      given-names: Che
+    - family-names: Wan
+      given-names: Zhongwei
+    - family-names: Zhou
+      given-names: Shuang
+    - family-names: Luo
+      given-names: Yuan
+    - family-names: Zhang
+      given-names: Rui
+    - family-names: Bitterman
+      given-names: Danielle S.
+    - family-names: Wang
+      given-names: Fei
+    - family-names: Shu
+      given-names: Kai

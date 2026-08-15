@@ -1,0 +1,21 @@
+# Table 5 -- prompt engineering: in-context learning, chain-of-thought,
+# role-play and self-reflection.
+#
+# COT and SR generate up to 512 tokens per sample instead of one, so these run
+# on the 500-sample cohort (random_index 6) and use `--scoring generate`: the
+# answer is embedded in prose and has to be parsed out. That path records no
+# PROB column, hence F1 only.
+
+produces: "Table 5 -- prompt engineering"
+datasets: [mimic3, mimic4]
+tasks: [length_pred, mortality_pred, readmission_pred]
+random_indices: [6]
+modes: [ICL, COT, RP, SR]
+scoring_by_mode: { ICL: logits, RP: logits, COT: generate, SR: generate }
+# NOTE: the released Meditron-70B prompt-engineering results are filed under
+# the name `Llama3-meditron-70b`, a different checkpoint from
+# `epfl-llm/meditron-70b` used elsewhere. Its HuggingFace id is not recorded
+# anywhere in the repo or the paper, so `--check` reports its 24 cells as
+# missing. Confirm the checkpoint before re-running this table.
+models: [prompt_traditional, prompt_llms]
+metrics: [f1]

@@ -1,0 +1,18 @@
+# Figure 3 -- the effect of decoding temperature.
+#
+# The only experiment in the paper that does not use greedy decoding. Because it
+# samples, these runs are not bit-reproducible: the trend is stable, the exact
+# numbers are not. Uses `--scoring generate`, since a temperature only has an
+# effect when sampling.
+
+produces: "Figure 3 -- decoding temperature"
+datasets: [mimic3]
+tasks: [length_pred, mortality_pred, readmission_pred]
+random_indices: [0]
+mode: ORI
+scoring: generate
+temperatures: [0.2, 0.4, 0.6, 0.8, 1.0]
+# The temperature sweep covers the main roster only, not the scale-study
+# checkpoints: 15 models x 3 tasks x 5 temperatures = 225 runs.
+models: [main_general, main_medical]
+metrics: [f1]

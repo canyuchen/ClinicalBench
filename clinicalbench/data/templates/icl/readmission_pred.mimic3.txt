@@ -1,0 +1,20 @@
+Patient information:
+Age: 31
+Gender: female
+Conditions: Acute respiratory failure, Myasthenia gravis with (acute) exacerbation, Other specified cardiac dysrhythmias, Diarrhea, Unspecified essential hypertension, Iron deficiency anemia, unspecified
+Procedures: Continuous invasive mechanical ventilation for 96 consecutive hours or more, Insertion of endotracheal tube, Injection or infusion of immunoglobulin, Non-invasive mechanical ventilation, Enteral infusion of concentrated nutritional substances, Transfusion of packed cells
+Using Drugs: immunosuppressants, corticosteroids for systemic use, plain, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), other nutrients, i.v. solutions, antivaricose therapy, anticholinergic agents, beta blocking agents, anesthetics, general, parasympathomimetics, other antidiarrheals, calcium, other analgesics and antipyretics, antithrombotic agents, antacids, potassium, i.v. solution additives, sulfonamides and trimethoprim, ace inhibitors, plain, antipropulsives, antidepressants, belladonna and derivatives, plain, anxiolytics, hypnotics and sedatives, other cardiac preparations, antiseptics and disinfectants, antiepileptics
+Will the patient be readmitted to the hospital within two weeks?
+Answer 1 for yes, 0 for no. Answer with only the number.
+Answer: 0
+
+Patient information:
+Age: 62
+Gender: male
+Conditions: Acute myocardial infarction of unspecified site, initial episode of care, Congestive heart failure, unspecified, Unknown Diagnosis, Acute kidney failure with lesion of tubular necrosis, Other and unspecified complications of medical care, not elsewhere classified, Pneumonia, organism unspecified, Late effects of cerebrovascular disease, hemiplegia affecting unspecified side, Unspecified pleural effusion, Unknown Diagnosis, Anticoagulants causing adverse effects in therapeutic use, Diabetes mellitus without mention of complication, type II or unspecified type, not stated as uncontrolled, Anemia, unspecified, Atrial fibrillation, Attention to tracheostomy, Unspecified essential hypertension, Pure hypercholesterolemia, Coronary atherosclerosis of unspecified type of vessel, native or graft, Aortocoronary bypass status
+Procedures: Thoracentesis, Enteral infusion of concentrated nutritional substances, Infusion of drotrecogin alfa (activated), Continuous invasive mechanical ventilation for less than 96 consecutive hours
+Using Drugs: antithrombotic agents, beta blocking agents, antiarrhythmics, class i and iii, other nutrients, lipid modifying agents, plain, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), other analgesics and antipyretics, other beta-lactam antibacterials, other antibacterials, i.v. solution additives, hypnotics and sedatives, anesthetics, general, agents against amoebiasis and other protozoal diseases, quinolone antibacterials, ace inhibitors, plain, high-ceiling diuretics, other antidiarrheals, antacids, insulins and analogues, decongestants and other nasal preparations for topical use, intestinal antiinfectives, calcium, antifungals for topical use, anxiolytics, beta-lactam antibacterials, penicillins, adrenergics, inhalants, antidepressants, potassium
+Will the patient be readmitted to the hospital within two weeks?
+Answer 1 for yes, 0 for no. Answer with only the number.
+Answer: 1
+

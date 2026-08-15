@@ -1,0 +1,11 @@
+# Table 2 (appendix) -- the Table 1 grid repeated on MIMIC-IV.
+
+produces: "Table 2 -- main results on MIMIC-IV (appendix)"
+datasets: [mimic4]
+tasks: [length_pred, mortality_pred, readmission_pred]
+random_indices: [0, 1, 2, 3, 4]
+mode: ORI
+scoring: logits
+models: [main_traditional, main_general, main_medical]
+metrics: [f1, auroc]
+aggregate: mean_ci95

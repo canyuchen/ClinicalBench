@@ -1,0 +1,45 @@
+ClinicalBench
+Copyright (c) 2024-2026 The ClinicalBench authors
+
+This product includes software developed by third parties, as described below.
+
+--------------------------------------------------------------------------------
+PyHealth
+--------------------------------------------------------------------------------
+
+`clinicalbench/_vendor/pyhealth/` contains a reduced copy of PyHealth v1.1.4.
+
+    https://github.com/sunlabuiuc/PyHealth
+    Copyright (c) 2022 Sunlab @ UIUC
+    Licensed under the BSD 3-Clause License.
+
+    Yang, C., Wu, Z., Jiang, P., Lin, Z., Gao, J., Danek, B., and Sun, J.
+    "PyHealth: A Deep Learning Toolkit for Healthcare Predictive Modeling."
+    KDD 2023.
+
+ClinicalBench uses PyHealth only to read the MIMIC-III and MIMIC-IV tables and
+to derive the three prediction tasks. The copy here is vendored rather than
+installed from PyPI so that cohort construction stays pinned to the exact code
+that produced the published results.
+
+Modifications made to the vendored copy:
+
+  1. Removed every subsystem ClinicalBench does not use: `models/`, `calib/`,
+     `metrics/`, `interpret/`, `sampler/`, `unittests/`, `trainer.py`,
+     `tokenizer.py`, `medcode/pretrained_embeddings/`, the non-MIMIC dataset
+     backends (eICU, OMOP, MIMIC-Extract, and the signal datasets), and the
+     task modules other than length-of-stay, mortality and readmission.
+
+  2. Rewrote internal absolute imports from `pyhealth.*` to
+     `clinicalbench._vendor.pyhealth.*`, so installing ClinicalBench cannot
+     shadow a real PyHealth installation in the same environment. (Before this
+     change the project's own `setup.py` declared `name = "pyhealth"` and
+     `pip install .` would replace an installed PyHealth.)
+
+  3. Trimmed `datasets/__init__.py` and `tasks/__init__.py` to the symbols that
+     survive the prune, and removed `__main__` demonstration blocks in the three
+     retained task modules that referenced the removed dataset backends.
+
+No functional change was made to cohort construction, code mapping, or task
+definitions. Downloaded code-mapping resources are still cached under
+`~/.cache/pyhealth/`, shared with an upstream install if one is present.

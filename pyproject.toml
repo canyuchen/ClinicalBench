@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clinicalbench"
+version = "1.0.0"
+description = "A benchmark comparing LLMs and traditional ML models on clinical prediction tasks"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+keywords = [
+    "clinical prediction",
+    "large language models",
+    "electronic health records",
+    "benchmark",
+    "healthcare AI",
+    "MIMIC",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Healthcare Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# Enough to rebuild the cohorts, run the traditional baselines, and score every
+# result file. LLM inference needs the `llm` extra.
+dependencies = [
+    "numpy",
+    "pandas>=1.3.2,<2",
+    "pandarallel>=1.5.3",
+    "python-dateutil>=2.8",
+    "networkx>=2.6.3",
+    "scikit-learn>=0.24.2",
+    "xgboost>=1.5",
+    "torch>=1.8.0",
+    "tqdm",
+    "urllib3<=1.26.15",
+    "pyyaml>=5.4",
+]
+
+[project.optional-dependencies]
+llm = [
+    "transformers>=4.40",
+    "accelerate>=0.26",
+    "peft>=0.10",
+    "sentencepiece",
+    "protobuf",
+    "einops",
+]
+dev = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://clinicalbench.github.io"
+Paper = "https://arxiv.org/abs/2411.06469"
+Repository = "https://github.com/canyuchen/ClinicalBench"
+
+[project.scripts]
+clinicalbench-build-cohort = "clinicalbench.data.build_cohort:main"
+clinicalbench-make-prompts = "clinicalbench.data.make_prompts:main"
+clinicalbench-make-splits = "clinicalbench.data.make_splits:main"
+clinicalbench-llm = "clinicalbench.inference.llm:main"
+clinicalbench-baselines = "clinicalbench.baselines.traditional:main"
+clinicalbench-score = "clinicalbench.eval.metrics:main"
+
+[tool.setuptools.packages.find]
+include = ["clinicalbench*"]
+
+[tool.setuptools.package-data]
+"clinicalbench.data" = ["atc_dic.json", "templates/icl/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

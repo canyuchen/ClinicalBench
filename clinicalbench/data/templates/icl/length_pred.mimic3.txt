@@ -1,0 +1,36 @@
+Patient information:
+Age: 74
+Gender: male
+Conditions: Subendocardial infarction, initial episode of care, Intestinal infection due to Clostridium difficile, Congestive heart failure, unspecified, Coronary atherosclerosis of native coronary artery, Unspecified essential hypertension, Pure hypercholesterolemia, Abdominal aneurysm without mention of rupture, Percutaneous transluminal coronary angioplasty status, Personal history of malignant neoplasm of large intestine
+Procedures: Unknown Procedure, Combined right and left heart cardiac catheterization, Coronary arteriography using two catheters
+Using Drugs: i.v. solution additives, cardiac stimulants excl. cardiac glycosides, other nutrients, antithrombotic agents, potassium, expectorants, excl. combinations with cough suppressants, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), hypnotics and sedatives, other analgesics and antipyretics, opioids, lipid modifying agents, plain, belladonna and derivatives, plain, other mineral supplements, other diagnostic agents, agents against amoebiasis and other protozoal diseases, anxiolytics, quinolone antibacterials, ace inhibitors, plain, beta blocking agents, other antibacterials
+Predict the number of weeks of stay in hospital.
+Answer 1 if no more than one week,
+Answer 2 if more than one week but not more than two weeks,
+Answer 3 if more than two weeks.
+Answer with only the number. Answer: 1
+
+Patient information:
+Age: 36
+Gender: male
+Conditions: Thoracic aneurysm without mention of rupture, Aortic valve disorders, Congenital insufficiency of aortic valve, Cardiac complications, not elsewhere classified, Other specified cardiac dysrhythmias, Unspecified essential hypertension
+Procedures: Open and other replacement of aortic valve, Resection of vessel with replacement, thoracic vessels, Other operations on vessels of heart, Extracorporeal circulation auxiliary to open heart surgery
+Using Drugs: drugs for functional gastrointestinal disorders, antiarrhythmics, class i and iii, drugs for constipation, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), other analgesics and antipyretics, antiinflammatory and antirheumatic products, non-steroids, opioids, other nutrients, anesthetics, general, antiinfectives and antiseptics, excl. combinations with corticosteroids, calcium, arteriolar smooth muscle, agents acting on, cardiac stimulants excl. cardiac glycosides, i.v. solution additives, other beta-lactam antibacterials, insulins and analogues, propulsives, hypnotics and sedatives, other mineral supplements, other diagnostic agents, beta blocking agents, high-ceiling diuretics, potassium, antithrombotic agents, antacids, urologicals, throat preparations, ace inhibitors, plain, angiotensin ii receptor blockers (arbs), plain
+Predict the number of weeks of stay in hospital.
+Answer 1 if no more than one week,
+Answer 2 if more than one week but not more than two weeks,
+Answer 3 if more than two weeks.
+Answer with only the number. Answer: 2
+
+Patient information:
+Age: 73
+Gender: male
+Conditions: Closed fracture of shaft of femur, Acute posthemorrhagic anemia, Subendocardial infarction, initial episode of care, Other postoperative infection, Unspecified septicemia, Severe sepsis, Septic shock, Unknown Diagnosis, Cardiogenic shock, Cardiac complications, not elsewhere classified, Paroxysmal ventricular tachycardia, Ventricular fibrillation, Congestive heart failure, unspecified, Atrial fibrillation, Unknown Diagnosis, Pneumonia, organism unspecified, Unspecified fall, Coronary atherosclerosis of native coronary artery, Cardiac pacemaker in situ
+Procedures: Open reduction of fracture with internal fixation, femur, Closed reduction of fracture without internal fixation, femur, Left heart cardiac catheterization, Coronary arteriography using two catheters, Continuous invasive mechanical ventilation for 96 consecutive hours or more, Venous catheterization, not elsewhere classified, Enteral infusion of concentrated nutritional substances
+Using Drugs: i.v. solution additives, opioids, other analgesics and antipyretics, beta blocking agents, selective calcium channel blockers with direct cardiac effects, antithrombotic agents, vasodilators used in cardiac diseases, agents for treatment of hemorrhoids and anal fissures for topical use, angiotensin ii receptor blockers (arbs), plain, antidepressants, drugs for constipation, drugs for peptic ulcer and gastro-oesophageal reflux disease (gord), anti-dementia drugs, lipid modifying agents, plain, antipsychotics, antipruritics, incl. antihistamines, anesthetics, etc., anxiolytics, antiarrhythmics, class i and iii, quinolone antibacterials, antacids, urologicals, expectorants, excl. combinations with cough suppressants, antiinfectives and antiseptics, excl. combinations with corticosteroids, calcium, other beta-lactam antibacterials, i.v. solutions, antivaricose therapy, other mineral supplements, other diagnostic agents, high-ceiling diuretics, anesthetics, general, muscle relaxants, peripherally acting agents, other antibacterials, other nutrients, hypnotics and sedatives, beta-lactam antibacterials, penicillins, cardiac stimulants excl. cardiac glycosides, anterior pituitary lobe hormones and analogues, other drugs for obstructive airway diseases, inhalants, adrenergics, inhalants, potassium, antifungals for topical use, ace inhibitors, plain
+Predict the number of weeks of stay in hospital.
+Answer 1 if no more than one week,
+Answer 2 if more than one week but not more than two weeks,
+Answer 3 if more than two weeks.
+Answer with only the number. Answer: 3
+
