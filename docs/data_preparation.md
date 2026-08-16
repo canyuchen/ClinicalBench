@@ -1,5 +1,9 @@
 # Data preparation
 
+This page is for turning the raw MIMIC databases into the prompts and cohorts
+the runners read. You need it before [running.md](running.md) or
+[reproduction.md](reproduction.md) can do anything with a model.
+
 ## Getting access
 
 MIMIC-III and MIMIC-IV are credentialed. You need a PhysioNet account, CITI
@@ -9,8 +13,9 @@ database before you can download anything.
 - MIMIC-III v1.4: <https://physionet.org/content/mimiciii/1.4/>
 - MIMIC-IV v3.0: <https://physionet.org/content/mimiciv/3.0/>
 
-No patient data is downloaded by this repository. What ships here is the cohort
-index files under `data/` and the model outputs under `results/`.
+No patient data is downloaded by this repository. What ships here is the 108
+cohort index files under `data/`. Our model outputs are hosted separately, on
+the Hub; see [results/README.md](../results/README.md).
 
 ## Running the pipeline
 

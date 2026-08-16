@@ -1,8 +1,10 @@
-# Fine-tuning (Figure 4)
+# Fine-tuning
 
-Figure 4 asks whether fine-tuning closes the gap. Fine-tuning itself is done
-with [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory), which is not
-vendored here; this page covers the parts that are.
+This page is for LoRA fine-tuning an LLM on these tasks, whether to reproduce
+the paper's Figure 4 or to train your own adapter. Training itself is done with
+[LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory), which is not vendored
+here; this page covers the parts that are: exporting the dataset, the settings
+the paper used, and evaluating the result.
 
 > The released repository shipped neither the dataset export nor the training
 > configuration, so this figure could not be reproduced from it. The export is

@@ -91,9 +91,6 @@ released result files:
   **2,505 runs**, all re-scorable without a GPU from a gated Hub dataset,
   [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results).
 
-Raw MIMIC data is not here and cannot be redistributed; see
-[docs/data_preparation.md](docs/data_preparation.md).
-
 ## Repository layout
 
 ```
@@ -109,15 +106,16 @@ clinicalbench/
 ├── eval/                  scoring one result file; aggregating a whole table
 └── _vendor/pyhealth/      reduced PyHealth, for reading MIMIC (see NOTICE)
 
+configs/models.yaml        checkpoint ids and the roster each table uses
 configs/paper/             one config per table and figure
-data/{task}/{dataset}/     cohort index files (.npy)
+data/{task}/{dataset}/     cohort index files (.npy), 108 of them
 results/                   released model outputs, fetched from the Hub
-docs/                      installation, data prep, reproduction, methodology
+docs/                      install, data, running, reproduction, methodology
 scripts/                   data-preparation shell entry point
 tests/                     104 tests, no GPU or MIMIC access required
 ```
 
-## Install
+## Installation
 
 ```shell
 conda create -n clinicalbench python=3.10 && conda activate clinicalbench
@@ -127,47 +125,81 @@ pytest tests/ -q
 
 Details in [docs/installation.md](docs/installation.md).
 
-## Quick start
+## Data
 
-**1. Build the cohorts and prompts** (needs credentialed MIMIC):
+Three pieces, with different access rules:
+
+| | Where | Needs |
+| --- | --- | --- |
+| **Cohort splits** | ships here, `data/{task}/{dataset}/*.npy` | nothing |
+| **Prompts** | you build them from raw MIMIC | PhysioNet credentialing |
+| **Our result files** | gated Hub dataset | a one-click Hub gate |
+
+**Raw MIMIC cannot be redistributed**, so the prompts are not here. Both
+databases are free but credentialed: complete CITI training and sign the DUA at
+[MIMIC-III](https://physionet.org/content/mimiciii/1.4/) and
+[MIMIC-IV](https://physionet.org/content/mimiciv/3.0/), then build everything in
+one pass:
 
 ```shell
 scripts/prepare_data.sh --mimic3 /path/to/mimic-iii/1.4 --mimic4 /path/to/mimic-iv/3.0/hosp
 ```
 
-**2. Run an LLM.** Any HuggingFace causal LM, not only the ones in the paper:
+The **108 split-index files do ship**, so your cohorts are the published ones
+rather than a fresh shuffle. Regenerating them is a no-op that overwrites them
+with identical bytes.
+
+Our **3,015 released result files** are hosted separately so cloning stays
+cheap. They are patient-level model outputs derived from MIMIC, so the dataset
+is gated; accept the terms once and approval is automatic:
 
 ```shell
-clinicalbench-llm \
-    --base_model meta-llama/Meta-Llama-3-8B-Instruct \
-    --task mortality_pred --dataset mimic3 \
-    --mode ORI --scoring logits --random_index 0
+clinicalbench-fetch-results     # 295 MB into results/
 ```
 
-**3. Run the traditional baselines** on the same cohort, on CPU:
+Full walkthrough in [docs/data_preparation.md](docs/data_preparation.md); file
+naming and columns in [results/README.md](results/README.md).
+
+## Models
+
+14 general-purpose LLMs (Llama3 8B/70B, Mistral-v0.3-7B, Gemma2-9B, Qwen2
+0.5B/1.5B/7B, Yi-v1.5 6B/9B/34B, Vicuna-v1.5-7B, Phi3.5-mini-3.8B,
+InternLM2.5-7B, MiniCPM3-4B), 8 medical LLMs (Meditron 7B/70B, Medllama3-8B,
+BioMistral-7B, Med42 8B/70B, BioMedGPT-7B, Internist-7B), and 11 traditional
+models (XGBoost, LogisticRegression, DecisionTree, RandomForest, AdaBoost, SVM,
+NaiveBayes, KNN, NeuralNetwork, Transformer, RNN).
+
+Checkpoint ids and the roster each table uses are in
+[configs/models.yaml](configs/models.yaml). That file is a convenience list, not
+a restriction: `--base_model` takes any HuggingFace id or local path.
+
+## Quick start
 
 ```shell
+# 1) Evaluate an LLM on one task and cohort
+clinicalbench-llm --base_model meta-llama/Meta-Llama-3-8B-Instruct \
+    --task mortality_pred --dataset mimic3 --mode ORI --scoring logits --random_index 0
+
+# 2) The 11 traditional baselines on the same cohort, on CPU
 clinicalbench-baselines --task mortality_pred --dataset mimic3 --random_index 0
-# or a subset: --models XGBoost SVM
-```
 
-**4. Score them against each other:**
-
-```shell
+# 3) Score a run, with AUROC
 clinicalbench-score --base_model meta-llama/Meta-Llama-3-8B-Instruct \
     --task mortality_pred --dataset mimic3 --random_index 0 --auroc
+
+# 4) Average several splits into a table with confidence intervals
+clinicalbench-table configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
+
+# 5) Chain-of-thought, which needs the generative scoring path
+clinicalbench-llm --base_model meta-llama/Meta-Llama-3-8B-Instruct \
+    --task mortality_pred --dataset mimic3 --mode COT --scoring generate
 ```
 
-**Comparing against the paper** needs no GPU and no MIMIC access:
+Steps 3 and 4 need no GPU and no MIMIC access once
+`clinicalbench-fetch-results` has run. Flag-by-flag reference in
+[docs/running.md](docs/running.md).
 
-```shell
-clinicalbench-fetch-results     # 295 MB from the Hub into results/
-python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
-python -m clinicalbench.experiments configs/paper/table_1.yaml --check
-# 360/360 cells have a result file under results/
-```
-
-Or read the precomputed metrics without downloading anything:
+Reading our metrics without downloading anything:
 
 ```python
 import pandas as pd
@@ -193,31 +225,20 @@ Full commands in [docs/reproduction.md](docs/reproduction.md).
 
 ## Documentation
 
-| Page | Covers |
+| I want to… | Read |
 | --- | --- |
-| [installation.md](docs/installation.md) | environments, hardware, verifying the install |
-| [data_preparation.md](docs/data_preparation.md) | PhysioNet access, the pipeline, how cohorts are built |
-| [reproduction.md](docs/reproduction.md) | config-to-table map, individual runs, modes, determinism |
-| [methodology.md](docs/methodology.md) | invalid-answer scoring, the two scoring paths, model selection, caveats |
-| [fine_tuning.md](docs/fine_tuning.md) | LLaMA-Factory dataset export, LoRA settings, evaluation |
-| [results/README.md](results/README.md) | fetching the results, file naming, columns, coverage |
+| set up an environment, check the install | [installation.md](docs/installation.md) |
+| get MIMIC access and build the prompts | [data_preparation.md](docs/data_preparation.md) |
+| **benchmark my own model** | [running.md](docs/running.md) |
+| re-derive a number from the paper | [reproduction.md](docs/reproduction.md) |
+| understand how answers are scored | [methodology.md](docs/methodology.md) |
+| fine-tune an LLM on these tasks | [fine_tuning.md](docs/fine_tuning.md) |
+| work with the released result files | [results/README.md](results/README.md) |
 
 **Read [methodology.md](docs/methodology.md) before quoting a number.** Two
 things there change how results should be read: unparseable LLM answers are
 scored as wrong rather than dropped, and the two scoring paths extract answers
 differently.
-
-## Models
-
-14 general-purpose LLMs (Llama3 8B/70B, Mistral-v0.3-7B, Gemma2-9B, Qwen2
-0.5B/1.5B/7B, Yi-v1.5 6B/9B/34B, Vicuna-v1.5-7B, Phi3.5-mini-3.8B,
-InternLM2.5-7B, MiniCPM3-4B), 8 medical LLMs (Meditron 7B/70B, Medllama3-8B,
-BioMistral-7B, Med42 8B/70B, BioMedGPT-7B, Internist-7B), and 11 traditional
-models (XGBoost, LogisticRegression, DecisionTree, RandomForest, AdaBoost, SVM,
-NaiveBayes, KNN, NeuralNetwork, Transformer, RNN).
-
-Checkpoint ids and the roster each table uses are in
-[configs/models.yaml](configs/models.yaml).
 
 ## Acknowledgments
 

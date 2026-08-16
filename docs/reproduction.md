@@ -1,5 +1,8 @@
 # Reproducing the paper
 
+This page is for re-deriving the numbers printed in the paper. To evaluate your
+own model or your own settings, see [running.md](running.md).
+
 Every table and figure has a config under `configs/paper/` that expands into the
 exact runs behind it, so the mapping from a published number to a command is
 mechanical.
@@ -73,60 +76,18 @@ row exactly on all six columns, which is what identified them; they have since
 been renamed to the canonical `meditron-70b`, so one model now has one name
 throughout. `tests/test_reproduction.py` pins those six numbers.
 
-## Individual runs
+## Re-running a single published cell
 
-An LLM on one task and cohort:
+The flags, the prompting modes and the two scoring paths are documented in
+[running.md](running.md). To reproduce one cell, use the settings its config
+lists. For example, the Table 1 Llama3-8B row on MIMIC-III, split 0:
 
 ```shell
-python -m clinicalbench.inference.llm \
+clinicalbench-llm \
     --base_model meta-llama/Meta-Llama-3-8B-Instruct \
     --task mortality_pred --dataset mimic3 \
     --mode ORI --scoring logits --random_index 0
 ```
-
-`--scoring logits` records the `PROB` column that AUROC needs. Chain-of-thought
-and self-reflection must use `--scoring generate`, because the answer is
-embedded in prose:
-
-```shell
-python -m clinicalbench.inference.llm \
-    --base_model meta-llama/Meta-Llama-3-8B-Instruct \
-    --task mortality_pred --dataset mimic3 \
-    --mode COT --scoring generate --random_index 6
-```
-
-All eleven traditional baselines on one cohort:
-
-```shell
-python -m clinicalbench.baselines.traditional \
-    --task mortality_pred --dataset mimic3 --random_index 0
-# or a subset, and a reduced training set:
-python -m clinicalbench.baselines.traditional \
-    --task mortality_pred --dataset mimic3 --random_index 0 --ratio 0.4 --models XGBoost SVM
-```
-
-Scoring one result file:
-
-```shell
-python -m clinicalbench.eval.metrics \
-    --base_model meta-llama/Meta-Llama-3-8B-Instruct \
-    --task mortality_pred --dataset mimic3 --random_index 0 --auroc
-```
-
-## Modes
-
-| `--mode` | What it does | Cohort | `--scoring` |
-| --- | --- | --- | --- |
-| `ORI` | the prompt as-is | any | `logits` |
-| `ICL` | few-shot exemplars prepended | 6 | `logits` |
-| `RP` | "Imagine that you are a doctor…" prefix | 6 | `logits` |
-| `COT` | asks for reasoning steps before the answer | 6 | `generate` |
-| `SR` | answer, reflect, answer again | 6 | `generate` |
-| `LORA` | merges an adapter before inference | 6 | `logits` |
-
-`ICL`, `RP`, `COT` and `SR` force `random_index=6` regardless of what you pass,
-because they are far slower per sample and were only ever run on the
-500-sample cohort.
 
 ## Determinism
 
