@@ -49,7 +49,7 @@ databases, under matched cohorts, features and evaluation.
 | Readmission | binary | Readmitted within two weeks? |
 
 Databases: [MIMIC-III](https://physionet.org/content/mimiciii/1.4/) and
-[MIMIC-IV](https://physionet.org/content/mimiciv/3.0/) (both credentialed).
+[MIMIC-IV](https://physionet.org/content/mimiciv/2.2/) (both credentialed).
 
 The gap is not small. On MIMIC-III mortality prediction, scored from the
 released result files:
@@ -137,17 +137,19 @@ Three pieces, with different access rules:
 
 **Raw MIMIC cannot be redistributed**, so the prompts are not here. Both
 databases are free but credentialed: complete CITI training and sign the DUA at
-[MIMIC-III](https://physionet.org/content/mimiciii/1.4/) and
-[MIMIC-IV](https://physionet.org/content/mimiciv/3.0/), then build everything in
-one pass:
+[MIMIC-III v1.4](https://physionet.org/content/mimiciii/1.4/) and
+[MIMIC-IV v2.2](https://physionet.org/content/mimiciv/2.2/), decompress the
+tables, then build everything in one pass:
 
 ```shell
-scripts/prepare_data.sh --mimic3 /path/to/mimic-iii/1.4 --mimic4 /path/to/mimic-iv/3.0/hosp
+scripts/prepare_data.sh --mimic3 /path/to/mimic-iii/1.4 --mimic4 /path/to/mimic-iv/2.2/hosp
 ```
 
 The **108 split-index files do ship**, so your cohorts are the published ones
 rather than a fresh shuffle. Regenerating them is a no-op that overwrites them
-with identical bytes.
+with identical bytes. This only holds on the versions above: another MIMIC
+release produces a different sample list, and the shipped indices would then
+point at different patients.
 
 Our **3,015 released result files** are hosted separately so cloning stays
 cheap. They are patient-level model outputs derived from MIMIC, so the dataset

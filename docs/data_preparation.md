@@ -11,7 +11,16 @@ MIMIC-III and MIMIC-IV are credentialed. You need a PhysioNet account, CITI
 database before you can download anything.
 
 - MIMIC-III v1.4: <https://physionet.org/content/mimiciii/1.4/>
-- MIMIC-IV v3.0: <https://physionet.org/content/mimiciv/3.0/>
+- MIMIC-IV v2.2: <https://physionet.org/content/mimiciv/2.2/>
+
+**Use these versions.** The paper used v1.4 and v2.2, and the cohort index files
+that ship here are positions into the sample list those versions produce. A
+different release yields a different list, so the shipped indices would select
+different patients and would no longer be the published split.
+
+The readers expect **uncompressed** tables. PhysioNet ships `.csv.gz`, so
+`gunzip` the files first, or point `--mimic3`/`--mimic4` at a directory where
+you have already done so.
 
 No patient data is downloaded by this repository. What ships here is the 108
 cohort index files under `data/`. Our model outputs are hosted separately, on
@@ -22,7 +31,7 @@ the Hub; see [results/README.md](../results/README.md).
 ```shell
 scripts/prepare_data.sh \
     --mimic3 /path/to/mimic-iii/1.4 \
-    --mimic4 /path/to/mimic-iv/3.0/hosp
+    --mimic4 /path/to/mimic-iv/2.2/hosp
 ```
 
 Either database may be omitted. The script aborts on the first failure.

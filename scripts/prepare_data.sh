@@ -3,7 +3,7 @@
 # Build every cohort and prompt file from the raw MIMIC tables.
 #
 #   scripts/prepare_data.sh --mimic3 /path/to/mimic-iii/1.4 \
-#                           --mimic4 /path/to/mimic-iv/3.0/hosp
+#                           --mimic4 /path/to/mimic-iv/2.2/hosp
 #
 # Either database may be omitted. Both require PhysioNet credentialing; see
 # docs/data_preparation.md.
