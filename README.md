@@ -51,8 +51,8 @@ databases, under matched cohorts, features and evaluation.
 Databases: [MIMIC-III](https://physionet.org/content/mimiciii/1.4/) and
 [MIMIC-IV](https://physionet.org/content/mimiciv/3.0/) (both credentialed).
 
-The gap is not small. On MIMIC-III mortality prediction, scored from the files
-in this repository:
+The gap is not small. On MIMIC-III mortality prediction, scored from the
+released result files:
 
 | Model | F1 (95% CI) | AUROC (95% CI) |
 | --- | --- | --- |
@@ -61,19 +61,56 @@ in this repository:
 | Gemma2-9B | 43.03 (42.35, 43.71) | 86.46 (85.94, 86.99) |
 | Llama3-8B | 25.81 (25.55, 26.06) | 85.40 (84.68, 86.12) |
 
-## What is here
+## Key features
 
-- **All 3,015 result files** behind the paper, so every number can be re-scored
-  without a GPU. That is every run behind the tables and Figure 3.
-  They live in a gated dataset on the Hub,
+- **Any HuggingFace causal LM on a clinical prediction task, in one command**:
+  `clinicalbench-llm --base_model <hf-id> --task mortality_pred --dataset mimic3`.
+  The paper's 22 checkpoints are a roster in
+  [configs/models.yaml](configs/models.yaml), not a hard-coded list, so
+  evaluating a model we never ran is one id away. 0.5B to 70B tested,
+  `--device_map auto` shards across GPUs, and `--lora_path` merges an adapter
+  before inference.
+- **11 traditional ML baselines on matched inputs**: XGBoost, LogisticRegression,
+  DecisionTree, RandomForest, AdaBoost, SVM, NaiveBayes, KNN, NeuralNetwork,
+  Transformer and RNN, fit on bag-of-codes features (conditions, procedures and
+  drugs bagged separately at **2,000** features each, plus age band and gender)
+  built from *the same index visit the LLM prompt describes*. Each is refit under
+  a **20-seed** sweep and the best validation-F1 checkpoint is scored. CPU only,
+  minutes per cohort.
+- **Six prompting strategies, two scoring paths**: `--mode ORI | ICL | COT | RP |
+  SR | LORA`. `--scoring logits` takes a single forward pass and records a
+  softmax over the answer tokens, which is what AUROC needs; `--scoring generate`
+  decodes up to **512** tokens and backward-scans for the answer, which `COT` and
+  `SR` require because the answer is buried in prose. `--temperature` sweeps
+  decoding, `--lora_path` covers fine-tuning.
+- **Raw MIMIC to prompts in one pass**: `scripts/prepare_data.sh --mimic3 …
+  --mimic4 …` reads the credentialed PhysioNet tables and writes per-task
+  samples, rendered prompts and cohort splits, for **3 tasks × 2 databases**.
+  The MIMIC reader is a pruned, vendored PyHealth that cannot shadow an upstream
+  install. Raw data is not redistributable; see
+  [docs/data_preparation.md](docs/data_preparation.md).
+- **Cohorts that don't flatter the model**: the train split is class-balanced,
+  but val and test are drawn from an offset that **preserves natural prevalence**,
+  so a mortality F1 is not inflated by a resampled test set. Splits are seeded
+  (`--random_index 0-4`, seeds 3/5/7/11/13, plus a 500-sample cohort at index 6),
+  and the index `.npy` files ship in `data/`, so your split *is* the published
+  split. `tests/test_config.py` pins every size.
+- **Invalid answers are scored, not dropped**: a model that refuses, hedges, or
+  answers `3` on a binary task is counted as a deliberate miss instead of
+  vanishing from the denominator, and every aggregated table carries an `inv%`
+  column. This changes the ranking, so it is documented rather than buried; see
+  [docs/methodology.md](docs/methodology.md).
+- **Config-driven experiment matrix**: one YAML per paper table and figure
+  expands into the exact runs behind it, with three verbs: list them, `--check`
+  which ones you have already run, and `--run --skip-existing` to fill the gaps.
+  **2,505 runs** across the six configs, plus **8 console scripts** for the
+  individual steps.
+- **Every published number re-scorable without a GPU**: all **3,015** result
+  files live in a gated Hub dataset,
   [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results),
-  and one command pulls them in.
-- **A config per table and figure**, expanding into the exact commands that
-  produced it.
-- **The cohort index files**, so splits are identical to the published ones.
-
-Raw MIMIC data is not here and cannot be redistributed; see
-[docs/data_preparation.md](docs/data_preparation.md).
+  fetched by one command; `summary.csv` has F1, AUROC and invalid-rate
+  precomputed for browsing without downloading. **104 tests** pin the cohort
+  sizes, the byte-exact prompts, and Table 1's headline numbers.
 
 ## Repository layout
 
@@ -110,11 +147,42 @@ Details in [docs/installation.md](docs/installation.md).
 
 ## Quick start
 
-**Re-score the paper without touching a GPU:**
+**1. Build the cohorts and prompts** (needs credentialed MIMIC):
+
+```shell
+scripts/prepare_data.sh --mimic3 /path/to/mimic-iii/1.4 --mimic4 /path/to/mimic-iv/3.0/hosp
+```
+
+**2. Run an LLM.** Any HuggingFace causal LM, not only the ones in the paper:
+
+```shell
+clinicalbench-llm \
+    --base_model meta-llama/Meta-Llama-3-8B-Instruct \
+    --task mortality_pred --dataset mimic3 \
+    --mode ORI --scoring logits --random_index 0
+```
+
+**3. Run the traditional baselines** on the same cohort, on CPU:
+
+```shell
+clinicalbench-baselines --task mortality_pred --dataset mimic3 --random_index 0
+# or a subset: --models XGBoost SVM
+```
+
+**4. Score them against each other:**
+
+```shell
+clinicalbench-score --base_model meta-llama/Meta-Llama-3-8B-Instruct \
+    --task mortality_pred --dataset mimic3 --random_index 0 --auroc
+```
+
+**Comparing against the paper** needs no GPU and no MIMIC access:
 
 ```shell
 clinicalbench-fetch-results     # 295 MB from the Hub into results/
 python -m clinicalbench.eval.aggregate configs/paper/table_1.yaml --task mortality_pred --dataset mimic3
+python -m clinicalbench.experiments configs/paper/table_1.yaml --check
+# 360/360 cells have a result file under results/
 ```
 
 Or read the precomputed metrics without downloading anything:
@@ -122,35 +190,6 @@ Or read the precomputed metrics without downloading anything:
 ```python
 import pandas as pd
 df = pd.read_csv("hf://datasets/canyuchen/clinicalbench-results/summary.csv")
-```
-
-**See what a table costs and what is already done:**
-
-```shell
-python -m clinicalbench.experiments configs/paper/table_1.yaml --check
-# 360/360 cells have a result file under results/
-```
-
-**Prepare data** (needs credentialed MIMIC):
-
-```shell
-scripts/prepare_data.sh --mimic3 /path/to/mimic-iii/1.4 --mimic4 /path/to/mimic-iv/3.0/hosp
-```
-
-**Run one LLM:**
-
-```shell
-python -m clinicalbench.inference.llm \
-    --base_model meta-llama/Meta-Llama-3-8B-Instruct \
-    --task mortality_pred --dataset mimic3 \
-    --mode ORI --scoring logits --random_index 0
-```
-
-**Run the traditional baselines:**
-
-```shell
-python -m clinicalbench.baselines.traditional \
-    --task mortality_pred --dataset mimic3 --random_index 0
 ```
 
 ## Reproducing the paper
