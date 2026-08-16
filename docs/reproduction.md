@@ -51,17 +51,17 @@ mimic3   mortality_pred    Meta-Llama-3-8B-...  ORI      5   25.81 (25.55, 26.06
 | `table_5.yaml` | Table 5: prompt engineering | index 6 | 144 | **144 (100%)** |
 | `table_6.yaml` | Tables 6–8: training-set scaling (appendix) | index 0–4 | 1320 | **1320 (100%)** |
 | `figure_3.yaml` | Figure 3: decoding temperature | index 0 | 225 | **225 (100%)** |
-| `figure_4.yaml` | Figure 4: fine-tuning | index 6 | 24 | 0 |
 
-2505 of 2529 runs (99.1%) can be re-scored from what ships in `results/`.
+All 2,505 runs in the table above can be re-scored from what ships in `results/`.
 
-### The remaining gap
+### Figure 4 is not in that table
 
-**Figure 4, all 24 cells.** Fine-tuning is done with LLaMA-Factory, which is
-not vendored here, and the trained adapters are not released. See
-[`fine_tuning.md`](fine_tuning.md), which does include the dataset export. Each
-run needs its own `--lora_path`, so use this config as a checklist rather than
-with `--run`.
+Fine-tuning is done with LLaMA-Factory, which is not vendored here, and the
+trained adapters were not released, so none of its 24 cells can be re-scored
+from `results/`. `configs/paper/figure_4.yaml` still describes them, and
+[`fine_tuning.md`](fine_tuning.md) covers the dataset export and the training
+setup. Each run needs its own `--lora_path`, so use that config as a checklist
+rather than with `--run`.
 
 ### A note on Meditron-70B's filenames
 

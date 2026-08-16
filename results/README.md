@@ -78,14 +78,14 @@ scored positionally against the test split rather than by patient id.
 
 ## Coverage
 
-2,505 of the 2,529 runs the paper's configs stand for (99.1%). Per config:
+Every run behind the paper's tables and Figure 3. Per config:
 
 ```shell
 python -m clinicalbench.experiments configs/paper/table_1.yaml --check
 ```
 
-Everything except Figure 4 is complete; that gap is documented in
-[docs/reproduction.md](../docs/reproduction.md#the-remaining-gap).
+Figure 4 is the exception: it needs fine-tuned adapters, which were not
+released. See [docs/reproduction.md](../docs/reproduction.md#figure-4-is-not-in-that-table).
 
 ## Models here that are not in the paper
 

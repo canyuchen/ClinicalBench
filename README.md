@@ -64,7 +64,7 @@ in this repository:
 ## What is here
 
 - **All 3,015 result files** behind the paper, so every number can be re-scored
-  without a GPU. That covers 99.1% of the runs the paper's configs stand for.
+  without a GPU. That is every run behind the tables and Figure 3.
   They live in a gated dataset on the Hub,
   [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results),
   and one command pulls them in.
@@ -163,10 +163,12 @@ python -m clinicalbench.baselines.traditional \
 | `configs/paper/table_5.yaml` | Table 5: prompt engineering | 144 | **100%** |
 | `configs/paper/table_6.yaml` | Tables 6–8: training-set scaling | 1320 | **100%** |
 | `configs/paper/figure_3.yaml` | Figure 3: decoding temperature | 225 | **100%** |
-| `configs/paper/figure_4.yaml` | Figure 4: fine-tuning | 24 | 0% |
 
-Full commands, and the one remaining gap, in
-[docs/reproduction.md](docs/reproduction.md).
+Every run behind these tables is re-scorable from the released files. Figure 4
+is the exception: it needs fine-tuned adapters, which were not released, so
+[docs/fine_tuning.md](docs/fine_tuning.md) covers training them yourself.
+
+Full commands in [docs/reproduction.md](docs/reproduction.md).
 
 ## Documentation
 
