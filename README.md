@@ -8,10 +8,7 @@
 [![Venue](https://img.shields.io/badge/%F0%9F%8F%86_VENUE-KDD_2026-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](https://kdd.org/kdd2026/)
 [![License](https://img.shields.io/badge/%E2%9A%96%EF%B8%8F_LICENSE-MIT-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](LICENSE)
 
-> **Can LLMs Beat Traditional ML Models in Clinical Prediction?**
-> **Not yet.** Across model scales, diverse prompting strategies and fine-tuning,
-> neither general-purpose nor medical LLMs beat traditional ML models on clinical
-> prediction, pointing to a deficiency in clinical reasoning and decision-making.
+> TLDR: **Can LLMs Beat Traditional ML Models in Clinical Prediction?** **Not yet.** We discover that both general-purpose and medical LLMs, even with different model scales and temperatures, diverse prompting or fine-tuning strategies, still cannot beat traditional ML models in clinical prediction yet, shedding light on their potential deficiency in clinical reasoning and decision-making.
 
 <a href="https://canyuchen.com">Canyu Chen</a>\*,
 <a href="https://openreview.net/profile?id=~Jian_Yu4">Jian Yu</a>\*,
