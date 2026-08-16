@@ -63,54 +63,36 @@ released result files:
 
 ## Key features
 
-- **Any HuggingFace causal LM on a clinical prediction task, in one command**:
-  `clinicalbench-llm --base_model <hf-id> --task mortality_pred --dataset mimic3`.
-  The paper's 22 checkpoints are a roster in
-  [configs/models.yaml](configs/models.yaml), not a hard-coded list, so
-  evaluating a model we never ran is one id away. 0.5B to 70B tested,
-  `--device_map auto` shards across GPUs, and `--lora_path` merges an adapter
-  before inference.
+- **Any HuggingFace causal LM, in one command**: `clinicalbench-llm --base_model
+  <hf-id> --task mortality_pred --dataset mimic3`. The paper's 22 checkpoints are
+  a roster in [configs/models.yaml](configs/models.yaml), not a hard-coded list,
+  so evaluating a model we never ran is one id away. 0.5B to 70B tested,
+  `--device_map auto` shards across GPUs, `--lora_path` merges an adapter.
 - **11 traditional ML baselines on matched inputs**: XGBoost, LogisticRegression,
   DecisionTree, RandomForest, AdaBoost, SVM, NaiveBayes, KNN, NeuralNetwork,
-  Transformer and RNN, fit on bag-of-codes features (conditions, procedures and
-  drugs bagged separately at **2,000** features each, plus age band and gender)
-  built from *the same index visit the LLM prompt describes*. Each is refit under
-  a **20-seed** sweep and the best validation-F1 checkpoint is scored. CPU only,
-  minutes per cohort.
+  Transformer and RNN, fit on bag-of-codes features (**2,000** each for
+  conditions, procedures and drugs, plus age band and gender) built from *the
+  same index visit the LLM prompt describes*. **20-seed** sweep, best validation
+  F1 scored. CPU, minutes per cohort.
 - **Six prompting strategies, two scoring paths**: `--mode ORI | ICL | COT | RP |
-  SR | LORA`. `--scoring logits` takes a single forward pass and records a
-  softmax over the answer tokens, which is what AUROC needs; `--scoring generate`
-  decodes up to **512** tokens and backward-scans for the answer, which `COT` and
-  `SR` require because the answer is buried in prose. `--temperature` sweeps
-  decoding, `--lora_path` covers fine-tuning.
-- **Raw MIMIC to prompts in one pass**: `scripts/prepare_data.sh --mimic3 …
-  --mimic4 …` reads the credentialed PhysioNet tables and writes per-task
-  samples, rendered prompts and cohort splits, for **3 tasks × 2 databases**.
-  The MIMIC reader is a pruned, vendored PyHealth that cannot shadow an upstream
-  install. Raw data is not redistributable; see
-  [docs/data_preparation.md](docs/data_preparation.md).
-- **Cohorts that don't flatter the model**: the train split is class-balanced,
-  but val and test are drawn from an offset that **preserves natural prevalence**,
-  so a mortality F1 is not inflated by a resampled test set. Splits are seeded
-  (`--random_index 0-4`, seeds 3/5/7/11/13, plus a 500-sample cohort at index 6),
-  and the index `.npy` files ship in `data/`, so your split *is* the published
-  split. `tests/test_config.py` pins every size.
-- **Invalid answers are scored, not dropped**: a model that refuses, hedges, or
-  answers `3` on a binary task is counted as a deliberate miss instead of
-  vanishing from the denominator, and every aggregated table carries an `inv%`
-  column. This changes the ranking, so it is documented rather than buried; see
-  [docs/methodology.md](docs/methodology.md).
+  SR | LORA`. `--scoring logits` takes one forward pass and records a softmax
+  over the answer tokens, which is what AUROC needs; `--scoring generate` decodes
+  up to **512** tokens and backward-scans for the answer, which `COT` and `SR`
+  need because the answer is buried in prose. Unparseable answers are scored as
+  wrong rather than dropped, and every table carries an `inv%` column.
+- **Raw MIMIC to prompts in one pass**: `scripts/prepare_data.sh` reads the
+  credentialed PhysioNet tables and writes samples, prompts and cohort splits for
+  **3 tasks × 2 databases**. Training splits are class-balanced while val and
+  test **preserve natural prevalence**, and the seeded index files ship in
+  `data/`, so your split *is* the published split.
 - **Config-driven experiment matrix**: one YAML per paper table and figure
   expands into the exact runs behind it, with three verbs: list them, `--check`
   which ones you have already run, and `--run --skip-existing` to fill the gaps.
-  **2,505 runs** across the six configs, plus **8 console scripts** for the
-  individual steps.
-- **Every published number re-scorable without a GPU**: all **3,015** result
-  files live in a gated Hub dataset,
-  [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results),
-  fetched by one command; `summary.csv` has F1, AUROC and invalid-rate
-  precomputed for browsing without downloading. **104 tests** pin the cohort
-  sizes, the byte-exact prompts, and Table 1's headline numbers.
+  **2,505 runs**, all re-scorable without a GPU from a gated Hub dataset,
+  [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results).
+
+Raw MIMIC data is not here and cannot be redistributed; see
+[docs/data_preparation.md](docs/data_preparation.md).
 
 ## Repository layout
 
