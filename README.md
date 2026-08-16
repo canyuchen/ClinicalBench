@@ -2,11 +2,11 @@
 
 **Can LLMs Beat Traditional ML Models in Clinical Prediction?**
 
-[![Website](https://img.shields.io/badge/website-clinicalbench.github.io-blue)](https://clinicalbench.github.io)
-[![Paper](https://img.shields.io/badge/paper-arXiv%3A2411.06469-b31b1b)](https://arxiv.org/abs/2411.06469)
-[![Venue](https://img.shields.io/badge/KDD-2026-1f6feb)](https://kdd.org/kdd2026/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Results](https://img.shields.io/badge/%F0%9F%A4%97%20results-clinicalbench--results-yellow)](https://huggingface.co/datasets/canyuchen/clinicalbench-results)
+[![Homepage](https://img.shields.io/badge/%F0%9F%8F%A0_HOMEPAGE-E8663C?style=for-the-badge&labelColor=E8663C)](https://clinicalbench.github.io)
+[![Paper](https://img.shields.io/badge/%F0%9F%93%84_PAPER-C9314A?style=for-the-badge&labelColor=C9314A)](https://arxiv.org/abs/2411.06469)
+[![Results](https://img.shields.io/badge/%F0%9F%A4%97_RESULTS-FFAE33?style=for-the-badge&labelColor=FFAE33)](https://huggingface.co/datasets/canyuchen/clinicalbench-results)
+[![Venue](https://img.shields.io/badge/%F0%9F%8F%86_VENUE-KDD_2026-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](https://kdd.org/kdd2026/)
+[![License](https://img.shields.io/badge/%E2%9A%96%EF%B8%8F_LICENSE-MIT-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](LICENSE)
 
 > **Not yet.** Both general-purpose and medical LLMs — across model scales, prompting
 > strategies, and fine-tuning — still cannot beat traditional ML models on clinical
