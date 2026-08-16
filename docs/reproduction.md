@@ -11,7 +11,7 @@ clinicalbench-fetch-results
 ```
 
 They come from [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results) on the Hub, a gated
-dataset — accept the terms once, approval is automatic — and land in `results/`,
+dataset (accept the terms once, approval is automatic), and land in `results/`,
 so the default `--result_root` keeps working.
 
 ## The three verbs
@@ -45,19 +45,19 @@ mimic3   mortality_pred    Meta-Llama-3-8B-...  ORI      5   25.81 (25.55, 26.06
 
 | Config | Paper | Cohort | Runs | Released |
 | --- | --- | --- | ---: | ---: |
-| `table_1.yaml` | Table 1 — main results, MIMIC-III | index 0–4 | 360 | **360 (100%)** |
-| `table_2.yaml` | Table 2 — main results, MIMIC-IV (appendix) | index 0–4 | 360 | **360 (100%)** |
-| `table_4.yaml` | Table 4 — LLM scale vs baselines | index 0 | 96 | **96 (100%)** |
-| `table_5.yaml` | Table 5 — prompt engineering | index 6 | 144 | **144 (100%)** |
-| `table_6.yaml` | Tables 6–8 — training-set scaling (appendix) | index 0–4 | 1320 | **1320 (100%)** |
-| `figure_3.yaml` | Figure 3 — decoding temperature | index 0 | 225 | **225 (100%)** |
-| `figure_4.yaml` | Figure 4 — fine-tuning | index 6 | 24 | 0 |
+| `table_1.yaml` | Table 1: main results, MIMIC-III | index 0–4 | 360 | **360 (100%)** |
+| `table_2.yaml` | Table 2: main results, MIMIC-IV (appendix) | index 0–4 | 360 | **360 (100%)** |
+| `table_4.yaml` | Table 4: LLM scale vs baselines | index 0 | 96 | **96 (100%)** |
+| `table_5.yaml` | Table 5: prompt engineering | index 6 | 144 | **144 (100%)** |
+| `table_6.yaml` | Tables 6–8: training-set scaling (appendix) | index 0–4 | 1320 | **1320 (100%)** |
+| `figure_3.yaml` | Figure 3: decoding temperature | index 0 | 225 | **225 (100%)** |
+| `figure_4.yaml` | Figure 4: fine-tuning | index 6 | 24 | 0 |
 
 2505 of 2529 runs (99.1%) can be re-scored from what ships in `results/`.
 
 ### The remaining gap
 
-**Figure 4 — all 24 cells.** Fine-tuning is done with LLaMA-Factory, which is
+**Figure 4, all 24 cells.** Fine-tuning is done with LLaMA-Factory, which is
 not vendored here, and the trained adapters are not released. See
 [`fine_tuning.md`](fine_tuning.md), which does include the dataset export. Each
 run needs its own `--lora_path`, so use this config as a checklist rather than
@@ -65,8 +65,8 @@ with `--run`.
 
 ### A note on Meditron-70B's filenames
 
-Meditron-70B's `random_index 6` results — its Table 5 base row and its four
-prompt-engineering rows — were originally written under the filename
+Meditron-70B's `random_index 6` results (its Table 5 base row and its four
+prompt-engineering rows) were originally written under the filename
 `Llama3-meditron-70b`, which does not match its checkpoint id
 (`epfl-llm/meditron-70b`). Scoring them reproduces the published Meditron-70B
 row exactly on all six columns, which is what identified them; they have since

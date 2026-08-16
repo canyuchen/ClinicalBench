@@ -6,7 +6,7 @@ Hugging Face Hub rather than in git, so cloning this repository stays cheap:
 **[huggingface.co/datasets/canyuchen/clinicalbench-results](https://huggingface.co/datasets/canyuchen/clinicalbench-results)**
 
 The dataset is gated: accept the terms once, approval is automatic. The gate is
-there because these are patient-level outputs derived from MIMIC — see
+there because these are patient-level outputs derived from MIMIC; see
 [Provenance](#provenance).
 
 ## Getting them
@@ -35,7 +35,7 @@ everything else in the repository works.
 ## Looking without downloading
 
 `summary.csv` on the Hub has one row per run with F1, AUROC and the invalid-
-answer rate already computed — 3,006 rows, browsable in the dataset viewer:
+answer rate already computed. 3,006 rows, browsable in the dataset viewer:
 
 ```python
 import pandas as pd
@@ -60,7 +60,7 @@ results/{task}/{dataset}/{task}_result_data_{model}_{index}{ratio}.csv
 | `{ratio}` | empty for the full training set, else `_0.05` … `_0.4` |
 
 Names are produced by [`clinicalbench/naming.py`](../clinicalbench/naming.py),
-which both the runner and the evaluator import — they used to build these
+which both the runner and the evaluator import. They used to build these
 strings separately and disagreed, which made every temperature file unreadable.
 
 ## Columns
@@ -73,7 +73,7 @@ strings separately and disagreed, which made every temperature file unreadable.
 | `ORIGINAL` | LLM runs | raw model output before parsing |
 | `PROB` | `--scoring logits` runs, all baselines | softmax over the answer tokens only; what AUROC uses |
 
-Traditional-baseline files have `ANSWER`, `PREDICTION`, `PROB` only — they are
+Traditional-baseline files have `ANSWER`, `PREDICTION`, `PROB` only; they are
 scored positionally against the test split rather than by patient id.
 
 ## Coverage
@@ -110,5 +110,5 @@ These files contain per-patient predictions derived from MIMIC-III and MIMIC-IV,
 including `SUBJECT_ID` and, for chain-of-thought and self-reflection runs,
 generated text that restates parts of the patient record. They are published
 here for verification of the paper's numbers. Access to the source databases
-themselves requires PhysioNet credentialing — see
+themselves requires PhysioNet credentialing; see
 [docs/data_preparation.md](../docs/data_preparation.md).

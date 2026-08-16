@@ -51,9 +51,9 @@ Add to its `data/dataset_info.json`:
 ## 3. Train
 
 The paper uses two variants of LoRA, both for 20 epochs, selecting the
-checkpoint with the best **validation** performance — the same rule and the same
-epoch budget as the traditional baselines, so neither side gets more tuning than
-the other.
+checkpoint with the best **validation** performance. That is the same rule and
+the same epoch budget as the traditional baselines, so neither side gets more
+tuning than the other.
 
 | Variant | What is adapted |
 | --- | --- |
@@ -111,8 +111,8 @@ python -m clinicalbench.eval.metrics \
 
 ## Which models
 
-Figure 4 fine-tunes four general-purpose checkpoints — **Llama3-8B, Gemma2-9B,
-Vicuna-v1.5-7B and Mistral-v0.3-7B** — on both databases and all three tasks,
+Figure 4 fine-tunes four general-purpose checkpoints (**Llama3-8B, Gemma2-9B,
+Vicuna-v1.5-7B and Mistral-v0.3-7B**) on both databases and all three tasks,
 which is the `finetune_llms` group in `configs/models.yaml`. The traditional
 reference lines in the figure are the index-6 baseline runs already covered by
 `configs/paper/table_5.yaml`.

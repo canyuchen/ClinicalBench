@@ -12,7 +12,7 @@ number outside the label space. ClinicalBench records such a row as a
 task the opposite of the gold label, and for length-of-stay `2` when the gold is
 `1` and `1` otherwise.
 
-The alternative — dropping unparseable rows — lets a model raise its score by
+The alternative, dropping unparseable rows, lets a model raise its score by
 refusing to answer the cases it finds hard, which would make weak and strong
 models incomparable. The cost is that the substituted value is derived from the
 gold label, so those rows carry no information about the model beyond "it did
@@ -38,7 +38,7 @@ measured on a different thing than one at 0%. The implementation is in
 The two extract answers differently, and this is deliberate: `generate` scans
 backwards for the last valid digit, so a chain-of-thought answer is read from
 its conclusion rather than from a digit mentioned mid-reasoning; `logits` reads
-only the final character. They disagree on output like `"1."` — the backward
+only the final character. They disagree on output like `"1."`: the backward
 scan reads `1`, the last-character rule scores it invalid. Each path keeps the
 behaviour that produced its published numbers.
 
@@ -50,8 +50,8 @@ length-of-stay, AUROC binarises the task as "stays longer than two weeks".
 
 `--scoring logits` needs the token ids for `"0"`, `"1"`, `"2"`, `"3"`. The
 published runs used `tokenizer.convert_tokens_to_ids`, which on SentencePiece
-vocabularies often has no entry for a bare digit — the token is `"▁1"` with a
-word-boundary marker — and silently returns the unknown-token id. When that
+vocabularies often has no entry for a bare digit (the token is `"▁1"` with a
+word-boundary marker) and silently returns the unknown-token id. When that
 happens the `PROB` column is read off whatever `<unk>` scores, and AUROC for
 that model is not meaningful.
 
@@ -71,7 +71,7 @@ deterministically here, so they are fit once. The two torch baselines
 
 LLMs get no equivalent selection: they are evaluated zero-shot, one pass. The
 comparison is therefore between a tuned baseline and an untuned LLM, which is
-the intended reading — the question is whether an LLM can match a baseline that
+the intended reading: the question is whether an LLM can match a baseline that
 a practitioner would actually have tuned.
 
 ## Decoding
@@ -84,8 +84,8 @@ trend is stable, the exact values are not.
 ## Training-set fractions
 
 The scaling tables keep the **first** `ratio` share of each label in file order
-rather than drawing a random subsample. The fractions are therefore nested — the
-40% set contains the 20% set — so the curves show the effect of adding data to a
+rather than drawing a random subsample. The fractions are therefore nested (the
+40% set contains the 20% set), so the curves show the effect of adding data to a
 fixed core, not the variance across independent draws. This is what produced the
 published tables and is preserved.
 
@@ -94,7 +94,7 @@ published tables and is preserved.
 Conditions, procedures and drugs are bagged separately by `CountVectorizer`
 (2000 features each), age is bucketed into six bands, gender into two, and the
 five blocks are concatenated. Only the index visit is used, matching what the
-LLM prompt shows — neither side sees the patient's history beyond that visit.
+LLM prompt shows. Neither side sees the patient's history beyond that visit.
 
 ## What the labels mean
 

@@ -6,8 +6,8 @@ MIMIC-III and MIMIC-IV are credentialed. You need a PhysioNet account, CITI
 "Data or Specimens Only Research" training, and a signed data use agreement per
 database before you can download anything.
 
-- MIMIC-III v1.4 — <https://physionet.org/content/mimiciii/1.4/>
-- MIMIC-IV v3.0 — <https://physionet.org/content/mimiciv/3.0/>
+- MIMIC-III v1.4: <https://physionet.org/content/mimiciii/1.4/>
+- MIMIC-IV v3.0: <https://physionet.org/content/mimiciv/3.0/>
 
 No patient data is downloaded by this repository. What ships here is the cohort
 index files under `data/` and the model outputs under `results/`.
@@ -24,7 +24,7 @@ Either database may be omitted. The script aborts on the first failure.
 
 It runs three stages, which you can also invoke individually:
 
-**1. Build cohorts** — reads the raw tables through the vendored PyHealth
+**1. Build cohorts.** Reads the raw tables through the vendored PyHealth
 readers, derives the three tasks, and writes `data/{task}/{dataset}/{task}_data.json`.
 
 ```shell
@@ -34,7 +34,7 @@ python -m clinicalbench.data.build_cohort --mimic3_path /path/to/mimic-iii/1.4
 Diagnoses, procedures and prescriptions are read; NDC drug codes are mapped to
 level-3 ATC classes so prompts name drug classes rather than product codes.
 
-**2. Render prompts** — turns each sample into the text an LLM sees, writing
+**2. Render prompts.** Turns each sample into the text an LLM sees, writing
 `{task}_data.csv` and, with `--both`, the few-shot `{task}_data_ICL.csv`.
 
 ```shell
@@ -60,7 +60,7 @@ The task wording lives in `clinicalbench/config.py` and the few-shot exemplars
 in `clinicalbench/data/templates/icl/`. Both are data, not code, so the six
 task-by-database combinations share one implementation.
 
-**3. Generate splits** — writes the train/val/test visit-id index files.
+**3. Generate splits.** Writes the train/val/test visit-id index files.
 
 ```shell
 python -m clinicalbench.data.make_splits --all
@@ -81,7 +81,7 @@ For each label the visit ids are shuffled with a fixed seed, then:
 
 For the majority class the visits between the training block and that offset are
 deliberately unused. That gap is what lets training be balanced while evaluation
-stays at the real prevalence — which matters, because these tasks are heavily
+stays at the real prevalence. That matters, because these tasks are heavily
 imbalanced and a balanced test set would flatter every model.
 
 `random_index` selects the cohort:

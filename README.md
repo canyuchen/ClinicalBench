@@ -1,6 +1,6 @@
 # ClinicalBench
 
-**Can LLMs Beat Traditional ML Models in Clinical Prediction?**
+
 
 [![Homepage](https://img.shields.io/badge/%F0%9F%8F%A0_HOMEPAGE-E8663C?style=for-the-badge&labelColor=E8663C)](https://clinicalbench.github.io)
 [![Paper](https://img.shields.io/badge/%F0%9F%93%84_PAPER-C9314A?style=for-the-badge&labelColor=C9314A)](https://arxiv.org/abs/2411.06469)
@@ -8,8 +8,9 @@
 [![Venue](https://img.shields.io/badge/%F0%9F%8F%86_VENUE-KDD_2026-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](https://kdd.org/kdd2026/)
 [![License](https://img.shields.io/badge/%E2%9A%96%EF%B8%8F_LICENSE-MIT-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](LICENSE)
 
-> **Not yet.** Both general-purpose and medical LLMs — across model scales, prompting
-> strategies, and fine-tuning — still cannot beat traditional ML models on clinical
+> **Can LLMs Beat Traditional ML Models in Clinical Prediction?**
+> **Not yet.** Across model scales, diverse prompting strategies and fine-tuning,
+> neither general-purpose nor medical LLMs beat traditional ML models on clinical
 > prediction, pointing to a deficiency in clinical reasoning and decision-making.
 
 <a href="https://canyuchen.com">Canyu Chen</a>\*,
@@ -29,14 +30,14 @@
 
 ## Updates
 
-- **2026-08** — `v1.0`: repository restructured into an installable
-  `clinicalbench` package. One config per paper table/figure, 99.1% of the
+- **2026-08.** `v1.0` restructures the repository into an installable
+  `clinicalbench` package: one config per paper table and figure, 99.1% of the
   paper's runs re-scorable from the shipped results without a GPU, 104
   regression tests, and the reproducibility fixes listed in
   [docs/reproduction.md](docs/reproduction.md).
-- **2026** — ClinicalBench is accepted at **KDD 2026**.
-- **2024-11** — paper on [arXiv](https://arxiv.org/abs/2411.06469); initial
-  release of code and results.
+- **2026.** ClinicalBench is accepted at **KDD 2026**.
+- **2024-11.** Paper on [arXiv](https://arxiv.org/abs/2411.06469), with the
+  first release of code and results.
 
 ## Overview
 
@@ -66,9 +67,10 @@ in this repository:
 ## What is here
 
 - **All 3,015 result files** behind the paper, so every number can be re-scored
-  without a GPU — 99.1% of the runs the paper's configs stand for. They live in
-  a gated dataset on the Hub, [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results); one
-  command pulls them in.
+  without a GPU. That covers 99.1% of the runs the paper's configs stand for.
+  They live in a gated dataset on the Hub,
+  [`canyuchen/clinicalbench-results`](https://huggingface.co/datasets/canyuchen/clinicalbench-results),
+  and one command pulls them in.
 - **A config per table and figure**, expanding into the exact commands that
   produced it.
 - **The cohort index files**, so splits are identical to the published ones.
@@ -158,13 +160,13 @@ python -m clinicalbench.baselines.traditional \
 
 | Config | Paper | Runs | Released |
 | --- | --- | ---: | ---: |
-| `configs/paper/table_1.yaml` | Table 1 — main results, MIMIC-III | 360 | **100%** |
-| `configs/paper/table_2.yaml` | Table 2 — main results, MIMIC-IV | 360 | **100%** |
-| `configs/paper/table_4.yaml` | Table 4 — LLM scale vs baselines | 96 | **100%** |
-| `configs/paper/table_5.yaml` | Table 5 — prompt engineering | 144 | **100%** |
-| `configs/paper/table_6.yaml` | Tables 6–8 — training-set scaling | 1320 | **100%** |
-| `configs/paper/figure_3.yaml` | Figure 3 — decoding temperature | 225 | **100%** |
-| `configs/paper/figure_4.yaml` | Figure 4 — fine-tuning | 24 | 0% |
+| `configs/paper/table_1.yaml` | Table 1: main results, MIMIC-III | 360 | **100%** |
+| `configs/paper/table_2.yaml` | Table 2: main results, MIMIC-IV | 360 | **100%** |
+| `configs/paper/table_4.yaml` | Table 4: LLM scale vs baselines | 96 | **100%** |
+| `configs/paper/table_5.yaml` | Table 5: prompt engineering | 144 | **100%** |
+| `configs/paper/table_6.yaml` | Tables 6–8: training-set scaling | 1320 | **100%** |
+| `configs/paper/figure_3.yaml` | Figure 3: decoding temperature | 225 | **100%** |
+| `configs/paper/figure_4.yaml` | Figure 4: fine-tuning | 24 | 0% |
 
 Full commands, and the one remaining gap, in
 [docs/reproduction.md](docs/reproduction.md).
@@ -205,7 +207,7 @@ attribution and the list of modifications.
 
 ## License
 
-MIT — see [LICENSE](LICENSE). We do not own any of the datasets used.
+MIT. See [LICENSE](LICENSE). We do not own any of the datasets used.
 
 ## Citation
 
