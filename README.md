@@ -5,7 +5,7 @@
 [![Homepage](https://img.shields.io/badge/%F0%9F%8F%A0_HOMEPAGE-E8663C?style=for-the-badge&labelColor=E8663C)](https://clinicalbench.github.io)
 [![Paper](https://img.shields.io/badge/%F0%9F%93%84_PAPER-C9314A?style=for-the-badge&labelColor=C9314A)](https://arxiv.org/abs/2411.06469)
 [![Results](https://img.shields.io/badge/%F0%9F%A4%97_RESULTS-FFAE33?style=for-the-badge&labelColor=FFAE33)](https://huggingface.co/datasets/canyuchen/clinicalbench-results)
-[![Venue](https://img.shields.io/badge/%F0%9F%8F%86_VENUE-KDD_2026-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](https://kdd.org/kdd2026/)
+[![Venue](https://img.shields.io/badge/%F0%9F%8F%86_VENUE-KDD_2026-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](https://kdd2026.kdd.org/)
 [![License](https://img.shields.io/badge/%E2%9A%96%EF%B8%8F_LICENSE-MIT-4C8BF5?style=for-the-badge&labelColor=4A4A4A)](LICENSE)
 
 > TLDR: **Can LLMs Beat Traditional ML Models in Clinical Prediction?** **Not yet.** We discover that both general-purpose and medical LLMs, even with different model scales and temperatures, diverse prompting or fine-tuning strategies, still cannot beat traditional ML models in clinical prediction yet, shedding light on their potential deficiency in clinical reasoning and decision-making.
